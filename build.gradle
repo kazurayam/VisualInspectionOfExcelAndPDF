@@ -1,0 +1,73 @@
+plugins {
+  id 'java'
+  id "com.katalon.gradle-plugin" version "0.0.7"
+}
+
+version = '0.1.0-SNAPSHOT'
+
+ext {
+  AUTO_IMPORTED_JAR_PREFIX = 'AUTOIMPORTED_'
+}
+
+repositories {
+  mavenCentral()
+  mavenLocal()
+}
+
+configurations {
+  myconf
+}
+
+dependencies {
+    myconf group: 'com.kazurayam', name: 'materialstore', version: '0.4.1'
+    myconf group: 'com.kazurayam', name: 'materialstore-mapper', version: '0.1.0'
+
+    // https://mvnrepository.com/artifact/org.apache.poi/poi
+    myconf group: 'org.apache.poi', name: 'poi', version: '3.17'
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    myconf group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-csv
+    myconf group: 'org.apache.commons', name: 'commons-csv', version: '1.9.0'
+
+    // https://mvnrepository.com/artifact/net.sf.cssbox/pdf2dom
+    myconf group: 'net.sf.cssbox', name: 'pdf2dom', version: '2.0.1'
+
+    // https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox
+    myconf group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.25'
+
+    // https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox-tools
+    myconf group: 'org.apache.pdfbox', name: 'pdfbox-tools', version: '2.0.25'
+}
+
+task drivers {
+    doFirst {
+        delete fileTree("Drivers") {
+            include("**/" + AUTO_IMPORTED_JAR_PREFIX + "*")
+        }
+    }
+    doLast {
+        copy { copySpec ->
+            copySpec
+                .from(project.getConfigurations().getByName("myconf"))
+                .into("Drivers")
+                .include(
+                    "**/materialstore*.jar",
+                    "**/materialstore-mapper*.jar",
+                    "**/ExecutionProfilesLoader*.jar",
+                    "**/ashot*.jar",
+                    "**/jsoup*.jar",
+                    "**/java-diff-utils*.jar",
+                    "**/freemarker*.jar",
+                    "**/cdt-java-client*.jar",
+                    "**/poi*.jar",
+                    "**/commons-csv*.jar",
+                    "**/pdf2dom*.jar",
+                    "**/pdfbox*.jar"
+                    )
+                .rename({ s ->
+                    AUTO_IMPORTED_JAR_PREFIX + s
+                    })
+        }
+    }
+}
