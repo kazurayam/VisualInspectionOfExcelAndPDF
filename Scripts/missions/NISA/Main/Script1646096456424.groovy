@@ -19,7 +19,7 @@ Path root = projectDir.resolve("store")
 
 Store store = Stores.newInstance(root)
 JobName jobName = new JobName("NISA")
-JobTimestamp startingTimestamp = JobTimestamp.now()
+JobTimestamp materializingTimestamp = JobTimestamp.now()
 
 URL pageUrl = new URL("https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html")
 
@@ -28,7 +28,7 @@ URL pageUrl = new URL("https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target
  * Materialize stage
  */
 WebUI.callTestCase(findTestCase("missions/NISA/materialize"), 
-	["pageUrl": pageUrl, "store": store, "jobName": jobName, "jobTimestamp": startingTimestamp])
+	["pageUrl": pageUrl, "store": store, "jobName": jobName, "jobTimestamp": materializingTimestamp])
 
 //---------------------------------------------------------------------
 /*
@@ -37,8 +37,9 @@ WebUI.callTestCase(findTestCase("missions/NISA/materialize"),
 // convert Excel files into CSV files
 // convert PDF files into HTML files
 // will output all derivatives in the currentTimestamp directory
-WebUI.callTestCase(findTestCase("missions/NISA/map"),
-	["pageUrl": pageUrl, "store": store, "jobName": jobName, "jobTimestamp": startingTimestamp])
+JobTimestamp mappingTimestamp = 
+	WebUI.callTestCase(findTestCase("missions/NISA/map"),
+		["pageUrl": pageUrl, "store": store, "jobName": jobName, "jobTimestamp": materializingTimestamp])
 
 
 //---------------------------------------------------------------------

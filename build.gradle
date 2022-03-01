@@ -19,7 +19,7 @@ configurations {
 }
 
 dependencies {
-    myconf group: 'com.kazurayam', name: 'materialstore', version: '0.4.1'
+    myconf group: 'com.kazurayam', name: 'materialstore', version: '0.4.3'
     myconf group: 'com.kazurayam', name: 'materialstore-mapper', version: '0.1.0'
 
     // https://mvnrepository.com/artifact/org.apache.poi/poi
@@ -60,10 +60,10 @@ task drivers {
                     "**/java-diff-utils*.jar",
                     "**/freemarker*.jar",
                     "**/cdt-java-client*.jar",
-                    "**/poi*.jar",
+                    "**/poi-3*.jar",
                     "**/commons-csv*.jar",
                     "**/pdf2dom*.jar",
-                    "**/pdfbox*.jar"
+                    "**/pdfbox-2*.jar"
                     )
                 .rename({ s ->
                     AUTO_IMPORTED_JAR_PREFIX + s
