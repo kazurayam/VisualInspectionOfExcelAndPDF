@@ -19,6 +19,9 @@ assert pageUrl != null
 assert store != null
 assert jobName != null
 assert jobTimestamp != null
+
+WebUI.comment("reduce started; jobTimestamp=${jobTimestamp}, jobName=${jobName}, store=${store}, pageUrl=${pageUrl}")
+
 JobTimestamp currentTimestamp = jobTimestamp
 
 Metadata metadata =

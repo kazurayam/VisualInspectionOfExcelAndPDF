@@ -8,11 +8,14 @@ import com.kazurayam.materialstore.map.MappedResultSerializer
 import com.kazurayam.materialstore.mapper.ExcelToCsvMapperPOI3
 import com.kazurayam.materialstore.metadata.Metadata
 import com.kazurayam.materialstore.metadata.QueryOnMetadata
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 assert pageUrl != null
 assert store != null
 assert jobName != null
 assert jobTimestamp != null
+
+WebUI.comment("map started; jobTimestamp=${jobTimestamp}, jobName=${jobName}, store=${store}, pageUrl=${pageUrl}")
 
 Metadata metadata =
 	Metadata.builder().put("URL.host", pageUrl.getHost()).build()

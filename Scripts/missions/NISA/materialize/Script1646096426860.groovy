@@ -8,11 +8,15 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.Path
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 assert pageUrl != null
 assert store != null
 assert jobName != null
 assert jobTimestamp != null
+
+WebUI.comment("materialize started; jobTimestamp=${jobTimestamp}, jobName=${jobName}, store=${store}, pageUrl=${pageUrl}")
+
 
 List<Target> targets = new ArrayList<>()
 targets.add(new Target("(//a[text()='EXCEL'])[1]", FileType.XLSX))
