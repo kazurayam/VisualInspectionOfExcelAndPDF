@@ -15,34 +15,22 @@ import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import groovy.json.JsonOutput
 
-assert pageUrl != null
 assert store != null
 assert jobName != null
-assert jobTimestamp != null
+assert previousJobTimestamp != null
+assert currentJobTimestamp != null
 
-WebUI.comment("reduce started; jobTimestamp=${jobTimestamp}, jobName=${jobName}, store=${store}, pageUrl=${pageUrl}")
 
-JobTimestamp currentTimestamp = jobTimestamp
-
-Metadata metadata =
-	Metadata.builder().put("URL.host", pageUrl.getHost()).build()
-
-// identify the last jobTimestamp that were created previously
-QueryOnMetadata query = QueryOnMetadata.builder(metadata).build()
-JobTimestamp previousTimestamp =
-	store.queryJobTimestampPriorTo(jobName, query, currentTimestamp)
-if (previousTimestamp == JobTimestamp.NULL_OBJECT) {
-	KeywordUtil.markFailedAndStop("previous JobTimestamp prior to ${previousTimestamp} is not found")
-}
-WebUI.comment("previousTimestamp=${previousTimestamp}")
-WebUI.comment("currentTimestamp =${currentTimestamp}")
+WebUI.comment("reduce started; jobName=${jobName}, store=${store}")
+WebUI.comment("reduce started; previousJobTimestamp=${previousJobTimestamp}")
+WebUI.comment("reduce started; currentJobTimestamp=${currentJobTimestamp}")
 
 // Look up the materials stored in the previous time of run
-MaterialList left = store.select(jobName, previousTimestamp, QueryOnMetadata.ANY)
+MaterialList left = store.select(jobName, previousJobTimestamp, QueryOnMetadata.ANY)
 assert left.size() > 0
 
 // Look up the materials stored in the current time of run
-MaterialList right = store.select(jobName, currentTimestamp, QueryOnMetadata.ANY)
+MaterialList right = store.select(jobName, currentJobTimestamp, QueryOnMetadata.ANY)
 assert right.size() > 0
 
 // zip 2 Materilas to form a single Artifact

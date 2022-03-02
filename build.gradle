@@ -3,7 +3,7 @@ plugins {
   id "com.katalon.gradle-plugin" version "0.0.7"
 }
 
-version = '0.1.1-SNAPSHOT'
+version = '0.1.2-SNAPSHOT'
 
 ext {
   AUTO_IMPORTED_JAR_PREFIX = 'AUTOIMPORTED_'
