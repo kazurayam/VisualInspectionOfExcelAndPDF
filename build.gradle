@@ -19,7 +19,7 @@ configurations {
 }
 
 dependencies {
-    myconf group: 'com.kazurayam', name: 'materialstore', version: '0.4.4-SNAPSHOT'
+    myconf group: 'com.kazurayam', name: 'materialstore', version: '0.4.5-SNAPSHOT'
     myconf group: 'com.kazurayam', name: 'materialstore-mapper', version: '0.1.0'
 
     // https://mvnrepository.com/artifact/org.apache.poi/poi

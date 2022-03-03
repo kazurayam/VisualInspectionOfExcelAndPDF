@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>reduce</name>
+   <name>reduce_chronos</name>
    <tag></tag>
    <comment></comment>
    <testCaseGuid>452f0d5b-d5ba-4241-9c76-e4e4f6fe438c</testCaseGuid>

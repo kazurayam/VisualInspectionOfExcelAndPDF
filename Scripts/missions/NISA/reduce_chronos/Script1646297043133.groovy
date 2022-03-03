@@ -1,5 +1,6 @@
 import com.kazurayam.materialstore.MaterialstoreFacade
 import com.kazurayam.materialstore.filesystem.FileType
+import com.kazurayam.materialstore.filesystem.JobName
 import com.kazurayam.materialstore.filesystem.JobTimestamp
 import com.kazurayam.materialstore.filesystem.Material
 import com.kazurayam.materialstore.filesystem.MaterialList
@@ -16,21 +17,23 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import groovy.json.JsonOutput
 
 assert store != null
-assert jobName != null
-assert previousJobTimestamp != null
-assert currentJobTimestamp != null
+assert currentMaterialList != null
 
+JobName jobName = currentMaterialList.getJobName()
+JobTimestamp currentTimestamp = currentMaterialList.getJobTimestamp()
+JobTimestamp previousTimestamp =
+	store.queryJobTimestampWithSimilarContentPriorTo(jobName, currentTimestamp)
 
 WebUI.comment("reduce started; jobName=${jobName}, store=${store}")
-WebUI.comment("reduce started; previousJobTimestamp=${previousJobTimestamp}")
-WebUI.comment("reduce started; currentJobTimestamp=${currentJobTimestamp}")
+WebUI.comment("reduce started; previousTimestamp=${previousTimestamp}")
+WebUI.comment("reduce started; currentTimestamp=${currentTimestamp}")
 
 // Look up the materials stored in the previous time of run
-MaterialList left = store.select(jobName, previousJobTimestamp, QueryOnMetadata.ANY)
+MaterialList left = store.select(jobName, previousTimestamp, QueryOnMetadata.ANY)
 assert left.size() > 0
 
 // Look up the materials stored in the current time of run
-MaterialList right = store.select(jobName, currentJobTimestamp, QueryOnMetadata.ANY)
+MaterialList right = store.select(jobName, currentTimestamp, QueryOnMetadata.ANY)
 assert right.size() > 0
 
 // zip 2 Materilas to form a single Artifact

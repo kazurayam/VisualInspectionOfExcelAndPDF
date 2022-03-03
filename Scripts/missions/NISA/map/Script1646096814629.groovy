@@ -10,15 +10,12 @@ import com.kazurayam.materialstore.metadata.Metadata
 import com.kazurayam.materialstore.metadata.QueryOnMetadata
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
-assert pageUrl != null
 assert store != null
 assert jobName != null
 assert jobTimestamp != null
+assert metadata != null
 
-WebUI.comment("map started; jobTimestamp=${jobTimestamp}, jobName=${jobName}, store=${store}, pageUrl=${pageUrl}")
-
-Metadata metadata =
-	Metadata.builder().put("URL.host", pageUrl.getHost()).build()
+WebUI.comment("map started; metadata=${metadata}, jobTimestamp=${jobTimestamp}, jobName=${jobName}, store=${store}")
 
 JobTimestamp workingTimestamp = JobTimestamp.laterThan(jobTimestamp)
 	
@@ -49,4 +46,4 @@ MaterialList csvMaterials = store.select(jobName, workingTimestamp,
 assert csvMaterials.size() > 0
 
 // return the name of newly created directory
-return workingTimestamp
+return csvMaterials

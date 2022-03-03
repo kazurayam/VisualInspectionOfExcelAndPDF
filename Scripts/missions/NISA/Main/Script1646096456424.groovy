@@ -5,8 +5,10 @@ import java.nio.file.Paths
 
 import com.kazurayam.materialstore.filesystem.JobName
 import com.kazurayam.materialstore.filesystem.JobTimestamp
+import com.kazurayam.materialstore.filesystem.MaterialList
 import com.kazurayam.materialstore.filesystem.Store
 import com.kazurayam.materialstore.filesystem.Stores
+import com.kazurayam.materialstore.metadata.Metadata
 import com.kazurayam.materialstore.metadata.QueryOnMetadata
 import com.kazurayam.materialstore.reduce.MProductGroup
 import com.kms.katalon.core.configuration.RunConfiguration
@@ -41,10 +43,14 @@ WebUI.callTestCase(findTestCase("missions/NISA/materialize"),
 // convert Excel files into CSV files
 // convert PDF files into HTML files
 // will output all derivatives in the currentTimestamp directory
-JobTimestamp currentMappingJobTimestamp =
+Metadata metadata = 
+	Metadata.builder()
+		.put("URL.host", pageUrl.getHost())
+		.build()
+MaterialList currentMaterialList =
 	WebUI.callTestCase(findTestCase("missions/NISA/map"),
-		["pageUrl": pageUrl, "store": store, "jobName": jobName,
-			"jobTimestamp": materializingTimestamp])
+		["store": store, "jobName": jobName, "jobTimestamp": materializingTimestamp,
+			"metadata": metadata])
 
 
 //---------------------------------------------------------------------
@@ -54,21 +60,9 @@ JobTimestamp currentMappingJobTimestamp =
 // lookup a previous jobTimesamp directory.
 // compare the current materials with the previos one
 // in order to find differences between the 2 versions. --- Chronos mode
-
-JobTimestamp previousMappingTimestamp = 
-	store.queryJobTimestampWithSimilarContentPriorTo(jobName, currentMappingJobTimestamp)
-
-WebUI.comment("previousMappingTimestamp=${previousMappingTimestamp.toString()}")	
-WebUI.comment("materializingTimestamp=${materializingTimestamp.toString()}")	
-WebUI.comment("currentMappingTimestamp=${currentMappingJobTimestamp.toString()}")
-
-
 MProductGroup reduced =
-	WebUI.callTestCase(findTestCase("missions/NISA/reduce"),
-		["pageUrl": pageUrl, "store": store, "jobName": jobName,
-			"previousJobTimestamp": previousMappingTimestamp,
-			"currentJobTimestamp": currentMappingJobTimestamp
-			])
+	WebUI.callTestCase(findTestCase("missions/NISA/reduce_chronos"),
+		["store": store, "currentMaterialList": currentMaterialList ])
 
 
 //---------------------------------------------------------------------
@@ -78,7 +72,7 @@ MProductGroup reduced =
 // compile a human-readable report
 int warnings =
 	WebUI.callTestCase(findTestCase("missions/NISA/report"),
-		["store": store, "jobName": jobName, "mProductGroup": reduced, "criteria": 0.0d])
+		["store": store, "mProductGroup": reduced, "criteria": 0.0d])
 
 
 //---------------------------------------------------------------------
