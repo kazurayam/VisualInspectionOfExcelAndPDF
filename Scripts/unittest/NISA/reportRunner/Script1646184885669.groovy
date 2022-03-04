@@ -47,7 +47,7 @@ JobTimestamp addedTimestamp = WebUI.callTestCase(findTestCase("missions/NISA/map
 
 // call the Reduce stage: CSV + CSV -> diff
 MProductGroup reduced =
-	WebUI.callTestCase(findTestCase("missions/NISA/reduce_chronos"),
+	WebUI.callTestCase(findTestCase("missions/NISA/reduce"),
 		["pageUrl": pageUrl, "store": store, "jobName": jobName, "jobTimestamp": addedTimestamp])
 	
 // call the Report stage: generate <JobName>-index.html

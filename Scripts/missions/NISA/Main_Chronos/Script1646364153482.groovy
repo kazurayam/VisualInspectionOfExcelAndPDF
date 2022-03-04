@@ -14,6 +14,7 @@ import com.kazurayam.materialstore.reduce.MProductGroup
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import groovy.json.JsonOutput
 
 //---------------------------------------------------------------------
 /*
@@ -32,8 +33,8 @@ URL pageUrl = new URL("https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target
 /*
  * Materialize stage
  */
-WebUI.callTestCase(findTestCase("missions/NISA/materialize"), 
-		["pageUrl": pageUrl, "store": store, "jobName": jobName, 
+WebUI.callTestCase(findTestCase("missions/NISA/materialize"),
+		["pageUrl": pageUrl, "store": store, "jobName": jobName,
 			"jobTimestamp": materializingTimestamp])
 
 //---------------------------------------------------------------------
@@ -43,7 +44,7 @@ WebUI.callTestCase(findTestCase("missions/NISA/materialize"),
 // convert Excel files into CSV files
 // convert PDF files into HTML files
 // will output all derivatives in the currentTimestamp directory
-Metadata metadata = 
+Metadata metadata =
 	Metadata.builder()
 		.put("URL.host", pageUrl.getHost())
 		.build()
@@ -61,9 +62,10 @@ MaterialList currentMaterialList =
 // compare the current materials with the previos one
 // in order to find differences between the 2 versions. --- Chronos mode
 MProductGroup reduced =
-	WebUI.callTestCase(findTestCase("missions/NISA/reduce_chronos"),
+	WebUI.callTestCase(findTestCase("missions/NISA/reduce"),
 		["store": store, "currentMaterialList": currentMaterialList ])
 
+println JsonOutput.prettyPrint(reduced.toString())
 
 //---------------------------------------------------------------------
 /*
