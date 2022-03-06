@@ -10,7 +10,7 @@ assert mProductGroup != null
 assert criteria != null
 
 /**
- * Test Cases/missions/NISA/report
+ * Test Cases/missions/AmznPress/report
  */
 WebUI.comment("report started; criteria=${criteria}, mProductGroup=${mProductGroup.getDescription()}, store=${store}")
 
@@ -27,4 +27,5 @@ WebUI.comment("The report can be found at ${report.toString()}")
 
 int warnings = mProductGroup.countWarnings(criteria)
 return warnings
+
 
