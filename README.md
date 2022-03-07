@@ -20,7 +20,23 @@ You don’t have to understand this page in detail except the following points.
 
 6.  The staffs hated this job. No need to tell why. They wanted some system to automate this *bullshit job*.
 
+I have worked long to solve this problem, and finally I have got a solution.
+
 ## Problem to solve
+
+The Excel files in the page are irregularly updated, and the publisher does not provided any notification. Therefore I have to
+
+1.  visit the web page automatically, for example once a day
+
+2.  download the current version .xlsx files, compare them with some previous version to find if there are any updates.
+
+3.  If any updates found, take some action. For example, put the newer .xlsx files into some organizational file server and send E-mail to those who are concerned to tell them: "Look, that Excel is updated!".
+
+The 1st problem (run a process regularly and automatically) will be easily solved. Linux [cron](https://en.wikipedia.org/wiki/Cron), Windows [Task Scheduler](https://docs.microsoft.com/en-us/windows/win32/taskschd/about-the-task-scheduler), some Continuous Integration servers like [Team City](https://www.jetbrains.com/teamcity/). Katalon offers [Test Ops](https://www.katalon.com/testops/) of course.
+
+The 3rd problem (take some actions when your script find it necessary) is easy to solve by your custom programming.
+
+The 2nd problem is the core part to solve. That is: **how can we detect if the current version of an Excel file is somehow updated?**
 
 ## Solution
 
