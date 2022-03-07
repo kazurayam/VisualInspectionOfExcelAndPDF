@@ -6,7 +6,7 @@ import com.kazurayam.materialstore.reduce.MProductGroup
 import com.kazurayam.materialstore.reduce.MProductGroupBuilder
 
 /**
- * Test Cases/missions/NISA/reduce
+ * Test Cases/main/NISA/reduce
  */
 
 assert store != null

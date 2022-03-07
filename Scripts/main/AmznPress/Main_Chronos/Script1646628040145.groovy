@@ -17,8 +17,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import groovy.json.JsonOutput
 
 /**
- * Test Cases/missions/NISA/Main_Chronos
- * 
+ * Test Cases/main/AmznPress/Main_Chronos 
  */
 
 //---------------------------------------------------------------------
@@ -29,34 +28,23 @@ Path projectDir = Paths.get(RunConfiguration.getProjectDir())
 Path root = projectDir.resolve("store")
 
 Store store = Stores.newInstance(root)
-JobName jobName = new JobName("NISA")
-JobTimestamp materializingTimestamp = JobTimestamp.now()
+JobName jobName = new JobName("AmznPress")
+JobTimestamp startingTimestamp = JobTimestamp.now()
 
-URL pageUrl = new URL("https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html")
-
-//---------------------------------------------------------------------
-/*
- * Materialize stage
- */
-WebUI.callTestCase(findTestCase("missions/NISA/materialize"),
-		["pageUrl": pageUrl, "store": store, "jobName": jobName,
-			"jobTimestamp": materializingTimestamp])
+URL rssUrl = new URL("https://press.aboutamazon.com/rss/news-releases.xml")
 
 //---------------------------------------------------------------------
 /*
- * Map stage
+ * Materialize stage and Map stage in one Test Case
+ * 
+ * 1. download RSS XML document to store
+ * 2. convert RSS XML document into Excel .xlsx file
+ * 3. convert Excel file into CSV file 
  */
-// convert Excel files into CSV files
-// convert PDF files into HTML files
-// will output all derivatives in the currentTimestamp directory
-Metadata metadata =
-	Metadata.builder()
-		.put("URL.host", pageUrl.getHost())
-		.build()
 MaterialList currentMaterialList =
-	WebUI.callTestCase(findTestCase("missions/NISA/map"),
-		["store": store, "jobName": jobName, "jobTimestamp": materializingTimestamp,
-			"metadata": metadata])
+	WebUI.callTestCase(findTestCase("main/AmznPress/materialize_map_map"),
+		["rssUrl": rssUrl, "store": store, "jobName": jobName,
+			"jobTimestamp": startingTimestamp])
 
 
 //---------------------------------------------------------------------
@@ -67,7 +55,7 @@ MaterialList currentMaterialList =
 // compare the current materials with the previos one
 // in order to find differences between the 2 versions. --- Chronos mode
 MProductGroup reduced =
-	WebUI.callTestCase(findTestCase("missions/NISA/reduce"),
+	WebUI.callTestCase(findTestCase("main/AmznPress/reduce"),
 		["store": store, "currentMaterialList": currentMaterialList ])
 
 println JsonOutput.prettyPrint(reduced.toString())
@@ -78,7 +66,7 @@ println JsonOutput.prettyPrint(reduced.toString())
  */
 // compile a human-readable report
 int warnings =
-	WebUI.callTestCase(findTestCase("missions/NISA/report"),
+	WebUI.callTestCase(findTestCase("main/AmznPress/report"),
 		["store": store, "mProductGroup": reduced, "criteria": 0.0d])
 
 

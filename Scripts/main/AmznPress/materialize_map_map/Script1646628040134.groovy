@@ -10,7 +10,7 @@ import com.kazurayam.materialstore.materialize.URLMaterializer
 import com.kazurayam.materialstore.metadata.QueryOnMetadata
 
 /**
- * Test Cases/missions/AmznPress/materialize_map_map
+ * Test Cases/main/AmznPress/materialize_map_map
  */
 
 assert rssUrl != null

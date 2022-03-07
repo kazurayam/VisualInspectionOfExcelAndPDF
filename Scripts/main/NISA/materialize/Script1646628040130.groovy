@@ -11,7 +11,7 @@ import java.nio.file.Path
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 /**
- * Test Cases/missions/NISA/materialize
+ * Test Cases/main/NISA/materialize
  */
 
 assert pageUrl != null

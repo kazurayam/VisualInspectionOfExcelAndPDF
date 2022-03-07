@@ -29,32 +29,31 @@ The 1st problem (running a process regularly and automatically) is easy to solve
 
 The 3rd problem (taking some actions when your script find it necessary) is easy to solve by your custom programming.
 
-The 2nd problem is difficult. **How can we detect that the current version of an Excel file is updated? How can we read the difference of current Excel and previous Excel quickly?**
+The 2nd problem is difficult. **How can my software detect that the current version of an Excel file is updated? How can my software present visually the difference between the current and previous Excel files?**
 
 I will call this issue **"Patrol for web resources"** for short. The Patrol requires some amount of custom software development.
 
 
 == Solution
 
-I have developped a set of Java/Groovy library to build a Patrol for you.
+I have developed and published a set of Java/Groovy library to build a Patrol for me and for you.
 
 - https://github.com/kazurayam/materialstore/[materialstore]
 - https://github.com/kazurayam/materialstore-mapper/[materialstore-mapper]
 
-And https://github.com/kazurayam/VisualInspectionOfExcelAndPDF[This project] shows a sample built on top of the 2 library which can perform a Patrol for me.
+And https://github.com/kazurayam/VisualInspectionOfExcelAndPDF[This project] shows a sample built on top of these 2 libraries.
 
+I won't use https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html[this] as the testbed for demonstration, because 
 
-I won't use https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html[this] as testbed for demonstration, because 
+1. this page is not updated frequent enough. It is updated at most once per a month. I want a testbed updated once per 1 or 2 days.
 
-1. this page is not updated frequent enough. It is updated at most once per a month. I want a testbed updated at least once per a day.
+2. this page is owned by a governmental organization. I do not like to bother them.
 
-2. this page is published by a governmental authoritative organization. I do not like to bother them.
-
-Instead I would use the following URL as the testbed for demonstration:
+Instead I would use the following URL as the testbed for my demonstration:
 
 - https://press.aboutamazon.com/rss/news-releases.xml[Amazon.com, Inc. - Press Room News Releases]
 
-This URL is updated frequently enough, and Amazon would not stop me accessing it using my automation software.
+This URL is updated frequently enough, and Amazon would not stop me accessing it a lot using my automation software.
 
 My softoware would do a series of file format conversion: RSS XML -> Excel -> CSV.
 

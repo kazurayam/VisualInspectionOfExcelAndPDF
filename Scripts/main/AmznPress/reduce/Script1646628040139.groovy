@@ -7,7 +7,7 @@ import com.kazurayam.materialstore.reduce.MProductGroupBuilder
 import groovy.json.JsonOutput
 
 /**
- * Test Cases/missions/AmznPress/reduce
+ * Test Cases/main/AmznPress/reduce
  */
 assert store != null
 assert currentMaterialList != null
