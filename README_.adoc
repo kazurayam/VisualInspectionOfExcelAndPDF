@@ -1,4 +1,4 @@
-= Visual Inspection of Excel and PDF
+= Patrol: visual inspection of Excel and PDF
 
 == Motivation
 
@@ -21,18 +21,27 @@ I have worked long to solve this problem, and finally I have got a solution.
 
 The Excel files in the page are irregularly updated, and the publisher does not provided any notification. Therefore I have to
 
-1. visit the web page automatically, for example once a day
-2. download the current version .xlsx files, compare them with some previous version to find if there are any updates.
+1. visit the web page regularly and automatically, for example once a day
+2. download the current version .xlsx files, compare the content with some previous version to find if there are any updates.
 3. If any updates found, take some action. For example, put the newer .xlsx files into some organizational file server and send E-mail to those who are concerned to tell them: "Look, that Excel is updated!".
 
-The 1st problem (run a process regularly and automatically) will be easily solved. Linux https://en.wikipedia.org/wiki/Cron[cron], Windows https://docs.microsoft.com/en-us/windows/win32/taskschd/about-the-task-scheduler[Task Scheduler], some Continuous Integration servers like https://www.jetbrains.com/teamcity/[Team City]. Katalon offers https://www.katalon.com/testops/[Test Ops] of course.
+The 1st problem (running a process regularly and automatically) is easy to solve using Linux https://en.wikipedia.org/wiki/Cron[cron], Windows https://docs.microsoft.com/en-us/windows/win32/taskschd/about-the-task-scheduler[Task Scheduler], and some Continuous Integration servers like https://www.jetbrains.com/teamcity/[Team City]. Katalon offers https://www.katalon.com/testops/[Test Ops] of course.
 
-The 3rd problem (take some actions when your script find it necessary) is easy to solve by your custom programming.
+The 3rd problem (taking some actions when your script find it necessary) is easy to solve by your custom programming.
 
-The 2nd problem is the core part to solve. That is: **how can we detect if the current version of an Excel file is somehow updated?**
+The 2nd problem is difficult. **how can we detect if the current version of an Excel file is somehow updated?** 
+
+I will call this issue **"Patrol"** for web resources. The Patrol requires some amount of custom software development.
 
 
 == Solution
+
+I have developped a set of Java/Groovy library to build a Patrol for you.
+
+- https://github.com/kazurayam/materialstore/[materialstore]
+- https://github.com/kazurayam/materialstore-mapper/[materialstore-mapper]
+
+And https://github.com/kazurayam/VisualInspectionOfExcelAndPDF[This project] shows a sample built on top of the 2 library which can perform a Patrol for me.
 
 == Description
 
