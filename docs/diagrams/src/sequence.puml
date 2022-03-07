@@ -1,0 +1,40 @@
+@startuml sequence
+actor       Tester               as tester
+participant Main                 as tc_Main
+participant materialize          as tc_materialize
+control     "RSS -> Excel"       as rss2xlsx
+control     "Excel -> CSV"       as xlsx2csv
+database    "current data"       as cdata
+queue       AmznPress            as site
+participant reduce               as tc_reduce #eee
+participant report               as tc_report #eee
+database    "previous data"      as pdata #eee
+database    "diff"               as diff #eee
+boundary    report               as report #eee
+
+tester         -> tc_Main        : run it
+tc_Main        -> tc_materialize : callTestCase
+tc_materialize -> site           : GET
+site           -> tc_materialize : respond XML
+tc_materialize -> cdata          : store XML
+tc_materialize -> rss2xlsx       : call
+cdata          -> rss2xlsx       : read XML
+rss2xlsx       -> rss2xlsx       : convert XML to XSLX
+rss2xlsx       -> cdata          : store Excel
+tc_materialize -> xlsx2csv       : call
+cdata          -> xlsx2csv       : read Excel
+xlsx2csv       -> xlsx2csv       : convert XSLX to CSV
+xlsx2csv       -> cdata          : store CSV
+== ↑ case-by-case / patternized↓ ==
+tc_Main        -> tc_reduce      : callTestCase
+cdata          -> tc_reduce      : read current CSV
+pdata          -> tc_reduce      : read previous CSV
+tc_reduce      -> tc_reduce      : calculate diff
+tc_reduce      -> diff           : store diff info
+tc_Main        -> tc_report      : callTestCase
+cdata          -> tc_report      : read CSV
+pdata          -> tc_report      : read CSV
+diff           -> tc_report      : read diff info
+tc_report      -> report         : write report
+tc_Main        -> tester         : say done
+@enduml

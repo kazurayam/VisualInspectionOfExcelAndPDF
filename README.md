@@ -16,7 +16,7 @@ You don’t have to understand this page in detail except the following points.
 
 4.  The publisher does not provide any push-style notification (like [RSS](https://en.wikipedia.org/wiki/RSS)) for this page. Those who are interested in the information of this page are asked to keep watching the page, read it and find updates somehow.
 
-5.  The company I worked for had a serious interest in the Excel files. Therefore some staffs are asked to visit this page everyday.
+5.  The company I worked for had a serious interest in the Excel files. Some staffs were asked to visit this page everyday. Usually they found the files unchanged.
 
 6.  The staffs hated this job. They wanted some system to automate this bullshit job.
 
@@ -36,34 +36,78 @@ The 1st problem (running a process regularly and automatically) is easy to solve
 
 The 3rd problem (taking some actions when your script find it necessary) is easy to solve by your custom programming.
 
-The 2nd problem is difficult. **How can we detect that the current version of an Excel file is updated? How can we read the difference of current Excel and previous Excel quickly?**
+The 2nd problem is difficult. **How can my software detect that the current version of an Excel file is updated? How can my software present visually the difference between the current and previous Excel files?**
 
-I will call this issue **"Patrol for web resources"** for short. The Patrol requires some amount of custom software development.
+How to compare a 2 Excel files? --- this is a technical challenge. My [Visual Inspection in Katalon Studio](https://forum.katalon.com/t/visual-inspection-in-katalon-studio-reborn/57440) showed that my product is capable of comparing pairs of PNG images and pairs of text files regardles its format --- HTML, XML, JSON, CSV, CSS, JS. However, `.xlsx` and `.pdf` are binary files. My text differ module can not deal with those binary files.
 
 ## Solution
 
-I have developped a set of Java/Groovy library to build a Patrol for you.
+I would call my product that addresses the aforementioned problem **Patrol** for short.
+
+I have developed and published a set of Java/Groovy library to build a Patrol for me and for you.
 
 -   [materialstore](https://github.com/kazurayam/materialstore/)
 
 -   [materialstore-mapper](https://github.com/kazurayam/materialstore-mapper/)
 
-And [This project](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF) shows a sample built on top of the 2 library which can perform a Patrol for me.
-
-I won’t use [this](https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html) as testbed for demonstration, because
-
-1.  this page is not updated frequent enough. It is updated at most once per a month. I want a testbed updated at least once per a day.
-
-2.  this page is published by a governmental authoritative organization. I do not like to bother them.
-
-Instead I would use the following URL as the testbed for demonstration:
-
--   [Amazon.com, Inc. - Press Room News Releases](https://press.aboutamazon.com/rss/news-releases.xml)
-
-This URL is updated frequently enough, and Amazon would not stop me accessing it using my automation software.
-
-My softoware would do a series of file format conversion: RSS XML → Excel → CSV.
+And [This project](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF) shows a sample built on top of these 2 libraries.
 
 ## Description
 
+### Target Application Under Test
+
+I won’t use [this page](https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html) as the testbed for demonstration, because
+
+1.  this page is not updated frequent enough. It is updated only once per a month at most. I want a URL as testbed which is updated more frequently; I want once per 1 or 2 days.
+
+2.  this page is owned by a governmental organization. I do not like bothering them.
+
+Instead I would use the following URL as the testbed for my demonstration:
+
+-   [Amazon.com, Inc. - Press Room News Releases](https://press.aboutamazon.com/rss/news-releases.xml)
+
+This URL provides a RSS feed in XML format, is updated frequently enough. I believe that the publisher (Amazon.com) would not stop me accessing it using my automated software.
+
+My software would do a series of file format conversion: RSS XML → Excel → CSV.
+
 ## Demonstration
+
+A example RSS document
+
+    <rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xml:base="https://press.aboutamazon.com/">
+      <channel>
+        <title>Amazon.com, Inc. - Press Room News Releases</title>
+        <link>https://press.aboutamazon.com/</link>
+        <description>Amazon.com, Inc. - Press Room News Releases</description>
+        <language>en</language>
+        ...
+        <item>
+          <title>Amazon Announces Partnerships with Universities and Colleges in Texas to Fully Fund Tuition for Local Hourly Employees</title>
+          <link>https://press.aboutamazon.com/news-releases/news-release-details/amazon-announces-partnerships-universities-and-colleges-texas</link>
+          <description>Amazon employees in the U.S. will benefit from new Career Choice partnerships with more than 140 Universities and Colleges including several colleges and universities in Texas as well as national non-profit online providers Southern New Hampshire University , Colorado State University – Global,</description>
+          <pubDate>Thu, 03 Mar 2022 12:45:00 -0500</pubDate>
+          <dc:creator>Amazon.com, Inc. - Press Room News Releases</dc:creator>
+          <guid isPermaLink="false">31586</guid>
+        </item>
+        ...
+
+This RSS document is internally converted into an Excel xlsx file, like this
+
+![spreadsheet](./docs/images/02_Spreadsheet.png)
+
+And then the Excel xlsx file is coverted into a CSV text file, like this
+
+    publishedDate,uri,title,link,description,author
+    Sat Mar 05 10:00:00 JST 2022,31591,Amazon travaille en collaboration avec des ONG et ses employés pour offrir un soutien immédiat au peuple ukrainien,https://press.aboutamazon.com/news-releases/news-release-details/amazon-travaille-en-collaboration-avec-des-ong-et-ses-employes,"Comme beaucoup d'entre vous à travers le monde, nous observons ce qui se passe en Ukraine avec horreur, inquiétude et cœur lourds. Bien que nous n’ayons pas d'activité commerciale directe en Ukraine, plusieurs de nos employés et partenaires sont originaires de ce pays ou entretiennent un lien","Amazon.com, Inc. - Press Room News Releases"
+    Fri Mar 04 02:45:00 JST 2022,31586,Amazon Announces Partnerships with Universities and Colleges in Texas to Fully Fund Tuition for Local Hourly Employees,https://press.aboutamazon.com/news-releases/news-release-details/amazon-announces-partnerships-universities-and-colleges-texas,"Amazon employees in the U.S. will benefit from new Career Choice partnerships with more than 140 Universities and Colleges including several colleges and universities in Texas as well as national non-profit online providers Southern New Hampshire University , Colorado State University – Global,","Amazon.com, Inc. - Press Room News Releases"
+    ...
+
+The CSV text file is ready to diff. The materialstore library can easily compare a pair of "previous CSV" and "current CSV". The library can generate a report for human readers.
+
+[./docs/store/AmznPress-index.html](./docs/store/AmznPress-index.html)
+
+![03 diff of CSV files](./docs/images/03_diff_of_CSV_files.png)
+
+The diagram illustrates the process sequence of [Test Case/main/AmznPress/Main\_Chronos](./Scripts/main/AmznPress/Main_Chronos/Script1646628040145.groovy)
+
+![sequence](./docs/diagrams/out/sequence/sequence.png)
