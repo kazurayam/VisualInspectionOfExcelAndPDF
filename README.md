@@ -16,7 +16,7 @@ You don’t have to understand this page in detail except the following points.
 
 4.  The publisher does not provide any push-style notification (like [RSS](https://en.wikipedia.org/wiki/RSS)) for this page. Those who are interested in the information of this page are asked to keep watching the page, read it and find updates somehow.
 
-5.  The company I worked for had a serious interest in the Excel files. Some staffs were asked to visit this page everyday. Usually they found the files unchanged.
+5.  The company I worked for had a serious interest in the Excel files. Some staffs were asked to visit this page everyday, and if any updates found, they are asked to trigger a series of actions to digest the Excel files. But usually they found the files unchanged.
 
 6.  The staffs hated this job. They wanted some system to automate this bullshit job.
 
@@ -24,25 +24,25 @@ Since then I have worked long to solve this problem. Finally I have got a soluti
 
 ## Problem to solve
 
-The Excel files in the page are irregularly updated, and the publisher does not provided any notification. Therefore my system has to
+The Excel files in the page are irregularly updated, and the publisher does not provided any notification. Therefore my solution has to
 
 1.  visit the web page regularly and automatically, for example once a day
 
-2.  download the current version .xlsx files, compare the content with some previous version to find if there are any updates.
+2.  download the current version .xlsx files, compare the content with some previous version to find if any updates there are.
 
-3.  If any updates found, take some action. For example, put the newer .xlsx files into some organizational file server and send an E-mail to those who are concerned.
+3.  If any updates found, take some action. For example, transfer the .xlsx files into some organizational file server and send some notification to those who are concerned: send messages to MQ and E-mail etc.
 
-The 1st problem (running a process regularly and automatically) is easy to solve using Linux [cron](https://en.wikipedia.org/wiki/Cron), Windows [Task Scheduler](https://docs.microsoft.com/en-us/windows/win32/taskschd/about-the-task-scheduler), and some Continuous Integration servers like [Team City](https://www.jetbrains.com/teamcity/). Katalon offers [Test Ops](https://www.katalon.com/testops/) of course.
+The 1st problem (running a process regularly and automatically) is easy to implement using Linux [cron](https://en.wikipedia.org/wiki/Cron), Windows [Task Scheduler](https://docs.microsoft.com/en-us/windows/win32/taskschd/about-the-task-scheduler), and some Continuous Integration servers like [Team City](https://www.jetbrains.com/teamcity/). Katalon offers [Test Ops](https://www.katalon.com/testops/) of course.
 
-The 3rd problem (taking some actions when your script find it necessary) is easy to solve by your custom programming.
+The 3rd problem (taking some actions when your script find it necessary) can be solved by straight-forward custom programming.
 
-The 2nd problem is difficult. **How can my software detect that the current version of an Excel file is updated? How can my software present visually the difference between the current and previous Excel files?**
+The 2nd problem is challenging. **How can my software detect that the current version of an Excel file is updated? How can my software present visually the difference between the current and previous Excel files?**
 
 How to compare a 2 Excel files? --- this is a technical challenge. My [Visual Inspection in Katalon Studio](https://forum.katalon.com/t/visual-inspection-in-katalon-studio-reborn/57440) showed that my product is capable of comparing pairs of PNG images and pairs of text files regardles its format --- HTML, XML, JSON, CSV, CSS, JS. However, `.xlsx` and `.pdf` are binary files. My text differ module can not deal with those binary files.
 
 ## Solution
 
-I would call my product that addresses the aforementioned problem **Patrol** for short.
+I would call my product **Patrol** for short. A Patrol will visit web site, scrape it, find changes in it, and take some actions.
 
 I have developed and published a set of Java/Groovy library to build a Patrol for me and for you.
 
