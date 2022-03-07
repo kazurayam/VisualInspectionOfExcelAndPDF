@@ -21,9 +21,8 @@ BiFunction<MaterialList, MaterialList, MProductGroup> func = {
 
 MProductGroup prepared = MProductGroupBuilder.chronos(store, currentMaterialList, func)
 assert prepared != null
-println JsonOutput.prettyPrint(prepared.toString())
-assert prepared.size() == 1   // exect only 1 MProduct of CSV files
 
+println JsonOutput.prettyPrint(prepared.toString())
 
 Inspector inspector = Inspector.newInstance(store)
 MProductGroup reduced = inspector.reduce(prepared)

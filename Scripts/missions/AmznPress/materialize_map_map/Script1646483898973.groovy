@@ -42,5 +42,7 @@ excel2csv.map(excelMaterial)
 
 // 4. construct a MaterialList which contains only CSV file, and return nit
 MaterialList csvList = store.select(jobName, jobTimestamp, QueryOnMetadata.ANY, FileType.CSV)
+assert csvList.size() == 1
+
 return csvList
 

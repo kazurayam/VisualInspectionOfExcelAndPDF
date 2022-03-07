@@ -5,6 +5,10 @@ import com.kazurayam.materialstore.Inspector
 import com.kazurayam.materialstore.filesystem.JobName
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
+/**
+ * Test Cases/missions/NISA/report 
+ */
+
 assert store != null
 assert mProductGroup != null
 assert criteria != null

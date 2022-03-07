@@ -5,10 +5,14 @@ import com.kazurayam.materialstore.filesystem.MaterialList
 import com.kazurayam.materialstore.filesystem.Store
 import com.kazurayam.materialstore.map.Mapper
 import com.kazurayam.materialstore.map.MappedResultSerializer
-import com.kazurayam.materialstore.mapper.ExcelToCsvMapperPOI3
+import com.kazurayam.materialstore.mapper.Excel2CSVMapperPOI3
 import com.kazurayam.materialstore.metadata.Metadata
 import com.kazurayam.materialstore.metadata.QueryOnMetadata
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+
+/**
+ * Test Cases/missions/NISA/map
+ */
 
 assert store != null
 assert jobName != null
@@ -29,7 +33,7 @@ MaterialList excelMaterials = store.select(jobName, jobTimestamp,
 assert excelMaterials.size()> 0
 
 // setup the mapper
-Mapper mapper = new ExcelToCsvMapperPOI3();
+Mapper mapper = new Excel2CSVMapperPOI3();
 mapper.setStore(store)
 MappedResultSerializer serializer =
 	new MappedResultSerializer(store, jobName, workingTimestamp)
