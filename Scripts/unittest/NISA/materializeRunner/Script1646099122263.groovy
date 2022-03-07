@@ -26,5 +26,5 @@ URL pageUrl = new URL("https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target
 /*
  * Materialize stage
  */
-WebUI.callTestCase(findTestCase("main/NISA/materialize"),
+WebUI.callTestCase(findTestCase("Patrol/NISA/materialize"),
 	["pageUrl": pageUrl, "store": store, "jobName": jobName, "jobTimestamp": materializingTimestamp])

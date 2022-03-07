@@ -6,7 +6,7 @@ import com.kazurayam.materialstore.filesystem.JobName
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 /**
- * Test Cases/main/NISA/report 
+ * Test Cases/Patrol/NISA/report 
  */
 
 assert store != null

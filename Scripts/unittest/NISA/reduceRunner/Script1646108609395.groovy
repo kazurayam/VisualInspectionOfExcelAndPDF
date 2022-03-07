@@ -38,10 +38,10 @@ JobTimestamp materializingTimestamp = new JobTimestamp("20220301_105226")
 URL pageUrl = new URL("https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html")
 
 // call the Map stage: Excel -> CSV conversion
-JobTimestamp addedTimestamp = WebUI.callTestCase(findTestCase("main/NISA/map"),
+JobTimestamp addedTimestamp = WebUI.callTestCase(findTestCase("Patrol/NISA/map"),
 	["pageUrl": pageUrl, "store": store, "jobName": jobName, "jobTimestamp": materializingTimestamp])
 
 // call the Reduce stage: CSV + CSV -> diff
 MProductGroup reduced = 
-	WebUI.callTestCase(findTestCase("main/NISA/reduce"),
+	WebUI.callTestCase(findTestCase("Patrol/NISA/reduce"),
 		["pageUrl": pageUrl, "store": store, "jobName": jobName, "jobTimestamp": addedTimestamp])

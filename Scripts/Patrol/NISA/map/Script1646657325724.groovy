@@ -11,7 +11,7 @@ import com.kazurayam.materialstore.metadata.QueryOnMetadata
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 /**
- * Test Cases/main/NISA/map
+ * Test Cases/Patrol/NISA/map
  */
 
 assert store != null

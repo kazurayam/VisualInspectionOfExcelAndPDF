@@ -6,7 +6,7 @@ import com.kazurayam.materialstore.filesystem.JobName
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 /**
- * Test Cases/main/AmznPress/report
+ * Test Cases/Patrol/AmznPress/report
  */
 
 assert store != null

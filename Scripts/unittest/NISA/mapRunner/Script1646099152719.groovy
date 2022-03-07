@@ -35,5 +35,5 @@ JobTimestamp materializingTimestamp = new JobTimestamp("20220301_105226")
 URL pageUrl = new URL("https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html")
 
 // call the Map stage
-JobTimestamp mappedTimestamp = WebUI.callTestCase(findTestCase("main/NISA/map"),
+JobTimestamp mappedTimestamp = WebUI.callTestCase(findTestCase("Patrol/NISA/map"),
 	["pageUrl": pageUrl, "store": store, "jobName": jobName, "jobTimestamp": materializingTimestamp])
