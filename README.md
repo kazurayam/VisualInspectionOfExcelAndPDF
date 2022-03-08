@@ -192,7 +192,7 @@ The "Reduce stage" and "Report stage" of the sample are highly modularized, and 
 
 ## External dependencies
 
-This project uses various open-source products, such as "Apache Commons IO", "java-diff-utils", "jsoup", "Apache POI". For the detail about the dependencies, please check the build.gradle\[`build.gradle`\].
+This project uses various open-source products, such as "Apache Commons IO", "java-diff-utils", "jsoup", "Apache POI". For the detail about the dependencies, please check the [`build.gradle`](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/blob/master/build.gradle).
 
 ## Applicability to your cases
 
