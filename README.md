@@ -82,21 +82,33 @@ I won’t use [this page](https://www.fsa.go.jp/policy/nisa2/about/tsumitate/tar
 
 2.  this page is owned by a governmental organization of JP. I do not like bothering them.
 
-Instead I would use the following URL as the testbed for my Patrol demonstration:
+Instead I would use the following URL as the testbed for my demonstration:
 
 -   [Amazon.com, Inc. - Press Room News Releases](https://press.aboutamazon.com/rss/news-releases.xml)
 
-This URL provides a RSS feed in XML format, is updated more frequently. I believe that the publisher (Amazon.com) would not stop me accessing it using my automated software.
+This URL provides a RSS feed in XML format, is updated more frequently (several times on Wed, Thu, Fri). And I believe that the publisher would not stop me accessing it using my automated software.
 
 ## Demonstration
 
 ### How to activate the demo
 
-open the Test Suite "Test Suite/Patrol/TS\_AmznPress" and run it.
+open the Test Suite `"Test Suite/Patrol/TS_AmznPress"` and run it.
 
-### How the demo runs
+![TS](./docs/images/00_TS_AmznPress.png)
 
-A example RSS document
+### Sequence diagram
+
+The following diagram illustrates the process sequence of [Test Case/main/AmznPress/Main\_Chronos](./Scripts/main/AmznPress/Main_Chronos/Script1646628040145.groovy)
+
+![sequence](./docs/diagrams/out/sequence/sequence.png)
+
+### How the data is transformed
+
+The sole input is the RSS document published by Amazon.com. The contents will change day by day. A snapshot looks like this:
+
+-   [Example RSS](https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/store/AmznPress/20220307_100304/objects/a9eec8a161f8600ac3bd9661bf0f561819c2fbe0.xml)
+
+<!-- -->
 
     <rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xml:base="https://press.aboutamazon.com/">
       <channel>
@@ -115,23 +127,67 @@ A example RSS document
         </item>
         ...
 
-This RSS document is internally converted into an Excel xlsx file, like this
+This RSS document will be internally converted into an Excel xlsx file, like this
 
-![spreadsheet](./docs/images/02_Spreadsheet.png)
+![Example Excel](./docs/images/02_Spreadsheet.pn)
 
-And then the Excel xlsx file is coverted into a CSV text file, like this
+And then the Excel file will be converted into a CSV text file, like this
+
+-   [Example CSV](https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/store/AmznPress/20220307_100304/objects/ff3a8a1f014bc640ac3346f98a26bd9f74a8f7a1.csv)
+
+<!-- -->
 
     publishedDate,uri,title,link,description,author
     Sat Mar 05 10:00:00 JST 2022,31591,Amazon travaille en collaboration avec des ONG et ses employés pour offrir un soutien immédiat au peuple ukrainien,https://press.aboutamazon.com/news-releases/news-release-details/amazon-travaille-en-collaboration-avec-des-ong-et-ses-employes,"Comme beaucoup d'entre vous à travers le monde, nous observons ce qui se passe en Ukraine avec horreur, inquiétude et cœur lourds. Bien que nous n’ayons pas d'activité commerciale directe en Ukraine, plusieurs de nos employés et partenaires sont originaires de ce pays ou entretiennent un lien","Amazon.com, Inc. - Press Room News Releases"
     Fri Mar 04 02:45:00 JST 2022,31586,Amazon Announces Partnerships with Universities and Colleges in Texas to Fully Fund Tuition for Local Hourly Employees,https://press.aboutamazon.com/news-releases/news-release-details/amazon-announces-partnerships-universities-and-colleges-texas,"Amazon employees in the U.S. will benefit from new Career Choice partnerships with more than 140 Universities and Colleges including several colleges and universities in Texas as well as national non-profit online providers Southern New Hampshire University , Colorado State University – Global,","Amazon.com, Inc. - Press Room News Releases"
     ...
 
-The materialstore library can easily compare a pair of "previous CSV" and "current CSV". The library can generate a report for human readers.
+The `Test Suites/Patrol/TS_AmznPress` will emit a report in HTML format. In this report you can see the result of visual comparison of 2 Excel files.
 
-[./docs/store/AmznPress-index.html](./docs/store/AmznPress-index.html)
+-   [store/AmznPress-index.html](https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/store/AmznPress-index.html)
 
-![03 diff of CSV files](./docs/images/03_diff_of_CSV_files.png)
+![report](./docs/images/03_diff_of_CSV_files.png)
 
-The following diagram illustrates the process sequence of [Test Case/main/AmznPress/Main\_Chronos](./Scripts/main/AmznPress/Main_Chronos/Script1646628040145.groovy)
+## How the code is written
 
-![sequence](./docs/diagrams/out/sequence/sequence.png)
+### Main script
+
+The `AmznPress/Main_Chronos` script is the entry point of overall processing.
+
+-   [`Test Cases/Patrol/AmznPress/Main_Chronos`](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/blob/master/Scripts/Patrol/AmznPress/Main_Chronos/Script1646657325745.groovy)
+
+It drives sub modules, which includes broadly 4 stages of processing.
+
+1.  **Materialize stage**
+
+2.  **Map stage**
+
+3.  **Reduce stage**
+
+4.  **Report stage**
+
+The script as "Materialize state" will get access to the target URL, download the web resources (e.g, RSS XML file), save it into the "store" directory on disk. The files stored in the "store" is called "Material".
+
+The script as "Map stage" will read a Material from the store, and write back a Material into the store. It will carry out a series of format conversion. E.g, RSS XML to Excel, Excel to CSV, PDF to PNG image, PDF to HTML.
+
+It is likely the case that a single script processes both of "Materialize stage" and "Map stage" sequentially. Also it is likely the case that a single script processes multiple source URLs and iterate over them.
+
+The "Materialize stage" and "Map stage" is heavily dependent on each use cases. You are supposed to design these stages and implement them for yourself.
+
+The "Reduce stage" will construct 2 sets of "MaterialList" = list of files to compare. And it will compare the pairs of Materials to generate the diff information.
+
+The "Report stage" will compile a report of comparison result.
+
+The "Reduce stage" and "Report stage" of the sample are highly modularized, and possibly you would just reuse the sample script. It should work for you.
+
+### Sub modules
+
+-   [Test Cases/Patrol/AmznPress/materialize\_map\_map](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/blob/master/Scripts/Patrol/AmznPress/materialize_map_map/Script1646657325735.groovy)
+
+-   [Test Cases/Patrol/AmznPress/reduce](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/blob/master/Scripts/Patrol/AmznPress/reduce/Script1646657325740.groovy)
+
+-   [Test Cases/Patrol/AmznPress/report](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/blob/master/Scripts/Patrol/AmznPress/report/Script1646657325749.groovy)
+
+## Appendix
+
+-   <https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/>
