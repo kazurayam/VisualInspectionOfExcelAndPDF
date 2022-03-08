@@ -176,13 +176,16 @@ The "Reduce stage" and "Report stage" of the sample are highly modularized, and 
 
 == External dependencies
 
+This project uses various open-source products, such as "Apache Commons IO", "java-diff-utils", "jsoup", "Apache POI". For the detail about the dependencies, please check the build.gradle[`build.gradle`].
+
+== Applicability to your cases
+
 The "materialstore" and "materialstore-mapper" library is general purposed. You should be able to apply them to any URL as your own target. 
 
 Only the "Materialize stage" depends on the Selenium-java API. The "Reduce stage" and "Report stage" has no dependency on Selenium.
 
 I used Katalon Studio for build a demonstration. But these 2 libraries do not depend on Katalon Studio API at all. You can build a Patrol using Gradle/Maven/Ant with the "materialstore" + "materialstore-mapper".
 
-Both libraries use various open-source products, such as "Apache Commons IO", "java-diff-utils", "jsoup", "Apache POI". For the detail about the dependencies, please check the `build.gradle` file of each projects.
 
 == Conclusion
 
