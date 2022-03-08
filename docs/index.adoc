@@ -1,0 +1,4 @@
+= Visual Inspection of Excel and PDF/docs
+
+- https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/store/AmznPress-index.html[store/AmznPress-index.html]
+- https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/store/NISA-index.html[store/NISA-index.html]

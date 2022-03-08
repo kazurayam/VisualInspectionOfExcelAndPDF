@@ -70,21 +70,32 @@ I won't use https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html
 
 2. this page is owned by a governmental organization of JP. I do not like bothering them.
 
-Instead I would use the following URL as the testbed for my Patrol demonstration:
+Instead I would use the following URL as the testbed for my demonstration:
 
 - https://press.aboutamazon.com/rss/news-releases.xml[Amazon.com, Inc. - Press Room News Releases]
 
-This URL provides a RSS feed in XML format, is updated more frequently. I believe that the publisher (Amazon.com) would not stop me accessing it using my automated software.
+This URL provides a RSS feed in XML format, is updated more frequently (several times on Wed, Thu, Fri). And I believe that the publisher would not stop me accessing it using my automated software.
 
 == Demonstration
 
 === How to activate the demo
 
-open the Test Suite "Test Suite/Patrol/TS_AmznPress" and run it.
+open the Test Suite `"Test Suite/Patrol/TS_AmznPress"` and run it.
 
-=== How the demo runs
+image:./docs/images/00_TS_AmznPress.png[TS]
 
-A example RSS document
+=== Sequence diagram
+
+
+The following diagram illustrates the process sequence of link:./Scripts/main/AmznPress/Main_Chronos/Script1646628040145.groovy[Test Case/main/AmznPress/Main_Chronos]
+
+image:./docs/diagrams/out/sequence/sequence.png[sequence]
+
+=== How the data is transformed
+
+The sole input is a RSS document published by Amazon.com. The contents will change day by day. A shapshot looks like this:
+
+link:./
 
 ```
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xml:base="https://press.aboutamazon.com/">
@@ -123,7 +134,3 @@ The materialstore library can easily compare a pair of "previous CSV" and "curre
 link:./docs/store/AmznPress-index.html[]
 
 image:./docs/images/03_diff_of_CSV_files.png[]
-
-The following diagram illustrates the process sequence of link:./Scripts/main/AmznPress/Main_Chronos/Script1646628040145.groovy[Test Case/main/AmznPress/Main_Chronos]
-
-image:./docs/diagrams/out/sequence/sequence.png[]
