@@ -6,7 +6,7 @@ This project was developed using Katalon Studio v0.8.2 (Free License). But it sh
 
 == Motivation
 
-A few years ago, I worked for a media company. I was asked to develop a tool software, which is a sort of web scraping tool. The target page was https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html[this] (is still available to public at MAR 2022). The page looks as follows:
+A few years ago, I worked for a media company. I was asked to develop a tool software, which was a sort of web scraping tool. The target page was https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html[this]; it is still available to public at MAR 2022. The page looks as follows:
 
 image:./docs/images/01_NISA_target_page.png[alt=target,width=640]
 
@@ -15,7 +15,7 @@ You don't need to understand this page in detail except the following points.
 1. The page contains several links `<a href="...">EXCEL</a>` tags to the URLs of Excel files. It contains links to PDF files `<a href="...">PDF</a>` as well.
 2. The content of Excel & PDF files are updated by the publisher irregularly. The frequency of updates are not determined. By tracking the record, I see once a month, or once per 2 months.
 3. The URL string of Excel/PDF files are fixed. The file names won't change at updates.
-4. The publisher does not provide any push-style notification (like https://en.wikipedia.org/wiki/RSS[RSS]) for this page. The publisher supposed that those who are interested in the information of this page should continue watching the page everyday.
+4. The publisher does not provide any push-style notification (like https://en.wikipedia.org/wiki/RSS[RSS]) for this page. The publisher expects that those who are interested in the information of this page should continue watching the page as often as possible.
 5. The company I worked for had a serious interest in the Excel files. Some employees were asked to visit this page everyday. They were asked, when found updates, to trigger a series of actions to digest the Excel files.
 6. The employees hated this job. They wanted some system to automate this bullshit job.
 
