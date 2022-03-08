@@ -190,11 +190,19 @@ The "Reduce stage" and "Report stage" of the sample are highly modularized, and 
 
 -   [Test Cases/Patrol/AmznPress/report](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/blob/master/Scripts/Patrol/AmznPress/report/Script1646657325749.groovy)
 
+## External dependencies
+
+The "materialstore" and "materialstore-mapper" library is general purposed. You should be able to apply them to any URL as your own target.
+
+Only the "Materialize stage" depends on the Selenium-java API. The "Reduce stage" and "Report stage" has no dependency on Selenium.
+
+I used Katalon Studio for build a demonstration. But these 2 libraries do not depend on Katalon Studio API at all. You can build a Patrol using Gradle/Maven/Ant with the "materialstore" + "materialstore-mapper".
+
+Both libraries use various open-source products, such as "Apache Commons IO", "java-diff-utils", "jsoup", "Apache POI". For the detail about the dependencies, please check the `build.gradle` file of each projects.
+
 ## Conclusion
 
-The employeesgi of the company which I worked for a few years ago required a software tool that could automate visiting [this](https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html) URL, check if the Excel files are updated or not, and if any changes are found, fire some data processing action. I would name this type of tool as **Patrol**. Now I am ready to build a Patrol for them. However I have already finished working with them. Unfortunately I do not have chance to help them any longer. I hope someone in the company find my development and apply it to help the employees who are engaged in bullshit jobs.
-
-The "materialstore" and "materialstore-mapper" library is general purposed. You should be able to apply them to any URL as your own target. These libraries depend on Selenium-java. I used Katalon Studio for demonstration. But these 2 libraries do not depend on Katalon Studio API at all. You can build a Patrol using Gradle/Maven/Ant with the "materialstore" + "materialstore-mapper".
+The employees of the company which I worked for a few years ago required a software tool that could automate visiting [this URL](https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html), check if the Excel files are updated or not, and if any changes are found, fire some data processing action. I would name this type of tool as **Patrol**. Now I am ready to build a Patrol for them. However I have already finished working with them. Unfortunately I do not have chance to help them any longer.
 
 ## Appendix
 
