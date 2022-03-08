@@ -134,3 +134,7 @@ The materialstore library can easily compare a pair of "previous CSV" and "curre
 link:./docs/store/AmznPress-index.html[]
 
 image:./docs/images/03_diff_of_CSV_files.png[]
+
+== Apendix
+
+- https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/
