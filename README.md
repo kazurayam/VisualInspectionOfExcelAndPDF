@@ -210,6 +210,6 @@ The employees of the company which I worked for a few years ago required a softw
 
 -   <https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/>
 
--   \[materialstore API javadoc\]
+-   \[materialstore API javadoc\](<https://kazurayam.github.io/materialstore/api/>)
 
--   \[materialstore-mapper API javadoc\]
+-   \[materialstore-mapper API javadoc\](<https://kazurayam.github.io/materialstore-mapper/api/>)
