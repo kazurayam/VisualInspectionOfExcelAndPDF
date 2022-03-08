@@ -204,12 +204,12 @@ I used Katalon Studio for build a demonstration. But these 2 libraries do not de
 
 ## Conclusion
 
-The employees of the company which I worked for a few years ago required a software tool that could automate visiting [this URL](https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html), check if the Excel files are updated or not, and if any changes are found, fire some data processing action. I would name this type of tool as **Patrol**. Now I am ready to build a Patrol for them. However I have already finished working with them. Unfortunately I do not have chance to help them any longer.
+The employees of the company I worked a few years ago required a software tool that could automate visiting [this URL](https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html), check if the Excel files are updated or not, and if any changes are found, fire some data processing action. I would name this type of tool as **Patrol**. Now I am ready to build a Patrol for them. However I have already finished working with them. I do not have chance to help them any longer.
 
 ## Appendix
 
--   <https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/>
+-   [VisualInspectionOfExcelAndPDF/docs/index](https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/)
 
--   \[materialstore API javadoc\](<https://kazurayam.github.io/materialstore/api/>)
+-   [materialstore API javadoc](https://kazurayam.github.io/materialstore/api/)
 
--   \[materialstore-mapper API javadoc\](<https://kazurayam.github.io/materialstore-mapper/api/>)
+-   [materialstore-mapper API javadoc](https://kazurayam.github.io/materialstore-mapper/api/)
