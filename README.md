@@ -102,7 +102,7 @@ The following diagram illustrates the process sequence of [Test Case/main/AmznPr
 
 ![sequence](./docs/diagrams/out/sequence/sequence.png)
 
-### How the data is transformed
+### How the data is transformed step-by-step
 
 The sole input is the RSS document published by Amazon.com. The contents will change day by day. A snapshot looks like this:
 
@@ -127,9 +127,9 @@ The sole input is the RSS document published by Amazon.com. The contents will ch
         </item>
         ...
 
-This RSS document will be internally converted into an Excel xlsx file, like this
+This RSS XML document will be internally converted into an Excel xlsx file, like this
 
-![Example Excel](./docs/images/02_Spreadsheet.pn)
+![Example Excel](./docs/images/02_Spreadsheet.png)
 
 And then the Excel file will be converted into a CSV text file, like this
 
@@ -142,13 +142,15 @@ And then the Excel file will be converted into a CSV text file, like this
     Fri Mar 04 02:45:00 JST 2022,31586,Amazon Announces Partnerships with Universities and Colleges in Texas to Fully Fund Tuition for Local Hourly Employees,https://press.aboutamazon.com/news-releases/news-release-details/amazon-announces-partnerships-universities-and-colleges-texas,"Amazon employees in the U.S. will benefit from new Career Choice partnerships with more than 140 Universities and Colleges including several colleges and universities in Texas as well as national non-profit online providers Southern New Hampshire University , Colorado State University – Global,","Amazon.com, Inc. - Press Room News Releases"
     ...
 
-The `Test Suites/Patrol/TS_AmznPress` will emit a report in HTML format. In this report you can see the result of visual comparison of 2 Excel files.
+### Report
+
+The `Test Suites/Patrol/TS_AmznPress` will eventually generate a report in HTML format. In this report you can see the result of visual comparison of 2 CSV files, which is equal to the comparison of 2 Excel files.
 
 -   [store/AmznPress-index.html](https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/store/AmznPress-index.html)
 
 ![report](./docs/images/03_diff_of_CSV_files.png)
 
-## How the code is written
+## How the test script is written
 
 ### Main script
 
@@ -187,6 +189,10 @@ The "Reduce stage" and "Report stage" of the sample are highly modularized, and 
 -   [Test Cases/Patrol/AmznPress/reduce](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/blob/master/Scripts/Patrol/AmznPress/reduce/Script1646657325740.groovy)
 
 -   [Test Cases/Patrol/AmznPress/report](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/blob/master/Scripts/Patrol/AmznPress/report/Script1646657325749.groovy)
+
+## Conclusion
+
+The employee of the company which I worked for a few years ago required a software tool that could automate visiting [this](https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html) URL, check if the Excel files are updated or not, and if any changes are found, fire some data processing action. I would name this type of tool as **Patrol**. Now I am ready to build a Patrol for them. However I have already finished working with them. I do not have chance to help them any longer. I hope someone in the company find my development and apply it to help the employees who are engaged in the bullshit jobs.
 
 ## Appendix
 
