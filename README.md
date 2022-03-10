@@ -102,7 +102,7 @@ The following diagram illustrates the process sequence of [Test Case/main/AmznPr
 
 ![sequence](./docs/diagrams/out/sequence/sequence.png)
 
-### How the data is transformed step-by-step
+### How the data is transformed, explained step-by-step
 
 The sole input is the RSS document published by Amazon.com. The contents will change day by day. A snapshot looks like this:
 
