@@ -41,5 +41,6 @@ FileUtils.deleteQuietly(root.resolve(jobName + "-index.html").toFile())
 // copy the directory and files from [projectDir]/docs/store/AmznPress/* 
 // which is the "previous" materials, the current materials will be compared against them
 Path sourceDir = docsStoreDir.resolve(jobName)
-FileUtils.copyDirectory(sourceDir.toFile(), targetDir.toFile())
+FileUtils.copyDirectory(sourceDir.resolve("20220307_100304").toFile(), targetDir.resolve("20220307_100304").toFile())
+FileUtils.copyDirectory(sourceDir.resolve("20220307_100311").toFile(), targetDir.resolve("20220307_100311").toFile())
 
