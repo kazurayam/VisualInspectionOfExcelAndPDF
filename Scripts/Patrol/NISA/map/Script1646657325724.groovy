@@ -2,12 +2,10 @@ import com.kazurayam.materialstore.filesystem.FileType
 import com.kazurayam.materialstore.filesystem.JobTimestamp
 import com.kazurayam.materialstore.filesystem.Material
 import com.kazurayam.materialstore.filesystem.MaterialList
-import com.kazurayam.materialstore.filesystem.Store
-import com.kazurayam.materialstore.map.Mapper
+import com.kazurayam.materialstore.filesystem.QueryOnMetadata
 import com.kazurayam.materialstore.map.MappedResultSerializer
+import com.kazurayam.materialstore.map.Mapper
 import com.kazurayam.materialstore.mapper.Excel2CSVMapperPOI3
-import com.kazurayam.materialstore.metadata.Metadata
-import com.kazurayam.materialstore.metadata.QueryOnMetadata
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 /**

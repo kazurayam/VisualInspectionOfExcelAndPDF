@@ -1,13 +1,12 @@
-import com.kazurayam.ks.URLResolver
+import java.nio.file.Files
+import java.nio.file.Path
+
 import com.kazurayam.ks.URLDownloader
+import com.kazurayam.ks.URLResolver
 import com.kazurayam.materialstore.filesystem.FileType
-import com.kazurayam.materialstore.metadata.Metadata
+import com.kazurayam.materialstore.filesystem.Metadata
 import com.kms.katalon.core.testobject.ConditionType
 import com.kms.katalon.core.testobject.TestObject
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-import java.nio.file.Files
-import java.nio.file.Paths
-import java.nio.file.Path
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 /**

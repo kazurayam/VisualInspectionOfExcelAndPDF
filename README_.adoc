@@ -91,7 +91,7 @@ The following diagram illustrates the process sequence of link:./Scripts/main/Am
 
 image:./docs/diagrams/out/sequence/sequence.png[sequence]
 
-=== How the data is transformed step-by-step
+=== How the data is transformed, explained step-by-step
 
 The sole input is the RSS document published by Amazon.com. The contents will change day by day. A snapshot looks like this:
 
