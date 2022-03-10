@@ -1,0 +1,288 @@
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <title>TextDifferToHTML output</title>
+    <style>
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: ui-monospace,SFMono-Regular,SZ Mono,
+        Menlo,Consolas,Liberation Mono,monospace;
+    font-size: 12px;
+    line-height: 20px;
+}
+div#container {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+td, th {
+    font-size: 12px;
+    border-right: 1px solid #ccc;
+    display: table-cell;
+}
+th {
+    border-bottom: 1px solid #ccc;
+}
+.blob-code-inner {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+.code-change {
+    background-color: #dbedff;
+}
+.code-delete {
+    background-color: #ffeef0;
+}
+.code-equal {
+    background-color: #ffffff;
+}
+.code-insert {
+    background-color: #e6ffec;
+}
+.deletion {
+    background-color: #ffdce0;
+}
+.insertion {
+    background-color: #ccffd8;
+}
+</style>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='inputs'>
+        <h2>Left</h2>
+        <dl>
+          <dt>URL</dt>
+          <dd>
+            <a href='../../../AmznPress/20220307_100304/objects/ff3a8a1f014bc640ac3346f98a26bd9f74a8f7a1.csv' target='Left'>AmznPress/20220307_100304/objects/ff3a8a1f014bc640ac3346f98a26bd9f74a8f7a1.csv</a>
+          </dd>
+          <dt>metadata</dt>
+          <dd>{"URL.host":"press.aboutamazon.com", "URL.path":"/rss/news-releases.xml", "URL.port":"80", "URL.protocol":"https", "foo":"bar", "sheet_index":"0", "sheet_name":"press.aboutamazon.com"}</dd>
+        </dl>
+        <h2>Right</h2>
+        <dl>
+          <dt>URL</dt>
+          <dd>
+            <a href='../../../AmznPress/20220310_203757/objects/e96bd4c2e345301b567d70071dcec04fda699ce4.csv' target='Right'>AmznPress/20220310_203757/objects/e96bd4c2e345301b567d70071dcec04fda699ce4.csv</a>
+          </dd>
+          <dt>metadata</dt>
+          <dd>{"URL.host":"press.aboutamazon.com", "URL.path":"/rss/news-releases.xml", "URL.port":"80", "URL.protocol":"https", "foo":"bar", "sheet_index":"0", "sheet_name":"press.aboutamazon.com"}</dd>
+        </dl>
+      </div>
+      <div id='decision'>
+        <h3>
+          <span>are DIFFERENT</span>
+          <span style='margin-left: 20px;'>25.00%%</span>
+        </h3>
+        <dl>
+          <dt>rows</dt>
+          <dd>
+            <ul id='rows-stats'>
+              <li>
+                <span>total :</span>
+                <span>12</span>
+              </li>
+              <li>
+                <span class='code-insert'>inserted :</span>
+                <span class='code-insert'>1</span>
+              </li>
+              <li>
+                <span class='code-delete'>deleted :</span>
+                <span class='code-delete'>1</span>
+              </li>
+              <li>
+                <span class='code-change'>changed :</span>
+                <span class='code-change'>1</span>
+              </li>
+              <li>
+                <span>equal :</span>
+                <span>9</span>
+              </li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+      <table id='split-diff'>
+        <colgroup>
+          <col width='44' />
+          <col />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Left</th>
+            <th>Right</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class='code-equal'>1</th>
+            <td class='code-equal'>
+              <span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>publishedDate,uri,title,link,description,author</span>
+            </span>
+          </span>
+        </td>
+        <td class='code-equal'>
+          <span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>publishedDate,uri,title,link,description,author</span>
+        </span>
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <th class='code-insert'>2</th>
+    <td class='code-insert'>
+      <span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'></span>
+    </span>
+  </span>
+</td>
+<td class='code-insert'>
+  <span class='blob-code-inner'><span class='blob-code-inner'><span class='insertion'>Thu Mar 10 20:00:00 JST 2022,31596,"OOO Until TBD? Majority of Canadian Office Workers Want Remote Work to Stay ",https://press.aboutamazon.com/news-releases/news-release-details/ooo-until-tbd-majority-canadian-office-workers-want-remote-work,"Half of Canadian office workers say working mostly/entirely remote is their ideal scenario; only one-quarter prefer mostly/entirely in office Ability to work remotely and flexible work hours are now more important to office workers than workplace culture, development/growth opportunities and","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+</tr>
+<tr>
+<th class='code-equal'>3</th>
+<td class='code-equal'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Sat Mar 05 10:00:00 JST 2022,31591,Amazon travaille en collaboration avec des ONG et ses employés pour offrir un soutien immédiat au peuple ukrainien,https://press.aboutamazon.com/news-releases/news-release-details/amazon-travaille-en-collaboration-avec-des-ong-et-ses-employes,"Comme beaucoup d'entre vous à travers le monde, nous observons ce qui se passe en Ukraine avec horreur, inquiétude et cœur lourds. Bien que nous n’ayons pas d'activité commerciale directe en Ukraine, plusieurs de nos employés et partenaires sont originaires de ce pays ou entretiennent un lien","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+<td class='code-equal'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Sat Mar 05 10:00:00 JST 2022,31591,Amazon travaille en collaboration avec des ONG et ses employés pour offrir un soutien immédiat au peuple ukrainien,https://press.aboutamazon.com/news-releases/news-release-details/amazon-travaille-en-collaboration-avec-des-ong-et-ses-employes,"Comme beaucoup d'entre vous à travers le monde, nous observons ce qui se passe en Ukraine avec horreur, inquiétude et cœur lourds. Bien que nous n’ayons pas d'activité commerciale directe en Ukraine, plusieurs de nos employés et partenaires sont originaires de ce pays ou entretiennent un lien","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+</tr>
+<tr>
+<th class='code-equal'>4</th>
+<td class='code-equal'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Fri Mar 04 02:45:00 JST 2022,31586,Amazon Announces Partnerships with Universities and Colleges in Texas to Fully Fund Tuition for Local Hourly Employees,https://press.aboutamazon.com/news-releases/news-release-details/amazon-announces-partnerships-universities-and-colleges-texas,"Amazon employees in the U.S. will benefit from new Career Choice partnerships with more than 140 Universities and Colleges including several colleges and universities in Texas as well as national non-profit online providers Southern New Hampshire University , Colorado State University – Global,","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+<td class='code-equal'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Fri Mar 04 02:45:00 JST 2022,31586,Amazon Announces Partnerships with Universities and Colleges in Texas to Fully Fund Tuition for Local Hourly Employees,https://press.aboutamazon.com/news-releases/news-release-details/amazon-announces-partnerships-universities-and-colleges-texas,"Amazon employees in the U.S. will benefit from new Career Choice partnerships with more than 140 Universities and Colleges including several colleges and universities in Texas as well as national non-profit online providers Southern New Hampshire University , Colorado State University – Global,","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+</tr>
+<tr>
+<th class='code-equal'>5</th>
+<td class='code-equal'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Thu Mar 03 22:00:00 JST 2022,31576,Amazon Boosts Upskilling Opportunities for Hourly Employees by Partnering with More Than 140 Universities and Colleges to Fully Fund Tuition,https://press.aboutamazon.com/news-releases/news-release-details/amazon-boosts-upskilling-opportunities-hourly-employees,"Amazon employees in the U.S. will benefit from new Career Choice partnerships with Southern New Hampshire University , Colorado State University–Global, Western Governors University , National University , and numerous local universities Amazon also partners with GEDWorks and Smart Horizons to","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+<td class='code-equal'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Thu Mar 03 22:00:00 JST 2022,31576,Amazon Boosts Upskilling Opportunities for Hourly Employees by Partnering with More Than 140 Universities and Colleges to Fully Fund Tuition,https://press.aboutamazon.com/news-releases/news-release-details/amazon-boosts-upskilling-opportunities-hourly-employees,"Amazon employees in the U.S. will benefit from new Career Choice partnerships with Southern New Hampshire University , Colorado State University–Global, Western Governors University , National University , and numerous local universities Amazon also partners with GEDWorks and Smart Horizons to","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+</tr>
+<tr>
+<th class='code-equal'>6</th>
+<td class='code-equal'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Wed Mar 02 18:00:00 JST 2022,31571,AWS and Bundesliga Debut Two New Match Facts Giving Fans Insight into Germany’s Top Football Players and Teams,https://press.aboutamazon.com/news-releases/news-release-details/aws-and-bundesliga-debut-two-new-match-facts-giving-fans-insight,"The two new stats, “Set Piece Threat” and “Skill,” powered by AWS machine learning and analytics services, enhance the football fan experience and give invaluable strategic insights to teams SEATTLE --(BUSINESS WIRE)--Mar. 2, 2022-- Amazon Web Services (AWS), an Amazon.com , Inc.","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+<td class='code-equal'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Wed Mar 02 18:00:00 JST 2022,31571,AWS and Bundesliga Debut Two New Match Facts Giving Fans Insight into Germany’s Top Football Players and Teams,https://press.aboutamazon.com/news-releases/news-release-details/aws-and-bundesliga-debut-two-new-match-facts-giving-fans-insight,"The two new stats, “Set Piece Threat” and “Skill,” powered by AWS machine learning and analytics services, enhance the football fan experience and give invaluable strategic insights to teams SEATTLE --(BUSINESS WIRE)--Mar. 2, 2022-- Amazon Web Services (AWS), an Amazon.com , Inc.","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+</tr>
+<tr>
+<th class='code-equal'>7</th>
+<td class='code-equal'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Tue Mar 01 23:07:00 JST 2022,31551,AWS et la LNH dévoilent la nouvelle statistique Probabilité de mise au jeu afin de rapprocher les amateurs de hockey de l'action sur la glace,https://press.aboutamazon.com/news-releases/news-release-details/aws-et-la-lnh-devoilent-la-nouvelle-statistique-probabilite-de,"Une nouvelle statistique issue de l'apprentissage automatique permet de prédire quel joueur a le plus de chances de remporter une mise au jeu avant que la rondelle ne tombe SEATTLE – 1er mars 2022 – Amazon Web Services, Inc. (AWS), une entreprise Amazon.com, Inc.","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+<td class='code-equal'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Tue Mar 01 23:07:00 JST 2022,31551,AWS et la LNH dévoilent la nouvelle statistique Probabilité de mise au jeu afin de rapprocher les amateurs de hockey de l'action sur la glace,https://press.aboutamazon.com/news-releases/news-release-details/aws-et-la-lnh-devoilent-la-nouvelle-statistique-probabilite-de,"Une nouvelle statistique issue de l'apprentissage automatique permet de prédire quel joueur a le plus de chances de remporter une mise au jeu avant que la rondelle ne tombe SEATTLE – 1er mars 2022 – Amazon Web Services, Inc. (AWS), une entreprise Amazon.com, Inc.","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+</tr>
+<tr>
+<th class='code-equal'>8</th>
+<td class='code-equal'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Tue Mar 01 23:00:00 JST 2022,31546,Amazon Luna Cloud Gaming Service Now Available to Everyone in Mainland U.S. with Unique Offer for Amazon Prime Members,https://press.aboutamazon.com/news-releases/news-release-details/amazon-luna-cloud-gaming-service-now-available-everyone-mainland,"All customers in mainland United States can game with Amazon Luna on devices they already own Prime Members can try Luna for free: new Prime Gaming Channel offers rotating selection of free titles, including Immortals Fenyx Rising Introducing Retro Channel and Jackbox Games Channel, expanding","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+<td class='code-equal'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Tue Mar 01 23:00:00 JST 2022,31546,Amazon Luna Cloud Gaming Service Now Available to Everyone in Mainland U.S. with Unique Offer for Amazon Prime Members,https://press.aboutamazon.com/news-releases/news-release-details/amazon-luna-cloud-gaming-service-now-available-everyone-mainland,"All customers in mainland United States can game with Amazon Luna on devices they already own Prime Members can try Luna for free: new Prime Gaming Channel offers rotating selection of free titles, including Immortals Fenyx Rising Introducing Retro Channel and Jackbox Games Channel, expanding","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+</tr>
+<tr>
+<th class='code-equal'>9</th>
+<td class='code-equal'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Tue Mar 01 17:01:00 JST 2022,31541,AWS and the NHL Unveil New Face-off Probability Stat to Bring Hockey Fans Closer to the Action on the Ice,https://press.aboutamazon.com/news-releases/news-release-details/aws-and-nhl-unveil-new-face-probability-stat-bring-hockey-fans,"New machine learning stat predicts which player is more likely to win a face-off before the puck is dropped SEATTLE --(BUSINESS WIRE)--Mar. 1, 2022-- Amazon Web Services, Inc. (AWS), an Amazon.com, Inc. company (NASDAQ: AMZN), and the National Hockey League (NHL) today announced Face-off","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+<td class='code-equal'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Tue Mar 01 17:01:00 JST 2022,31541,AWS and the NHL Unveil New Face-off Probability Stat to Bring Hockey Fans Closer to the Action on the Ice,https://press.aboutamazon.com/news-releases/news-release-details/aws-and-nhl-unveil-new-face-probability-stat-bring-hockey-fans,"New machine learning stat predicts which player is more likely to win a face-off before the puck is dropped SEATTLE --(BUSINESS WIRE)--Mar. 1, 2022-- Amazon Web Services, Inc. (AWS), an Amazon.com, Inc. company (NASDAQ: AMZN), and the National Hockey League (NHL) today announced Face-off","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+</tr>
+<tr>
+<th class='code-delete'>10</th>
+<td class='code-delete'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='deletion'>Wed Feb 23 21:00:00 JST 2022,31566,Amazon Canada launches new program to teach coding through music from Indigenous artists,https://press.aboutamazon.com/news-releases/news-release-details/amazon-canada-launches-new-program-teach-coding-through-music,"Amazon Canada partners with youth empowerment charity TakingITGlobal for a new program that builds technology skills while promoting social justice Students will remix music from Indigenous artists and enter for the chance to win $5,000 scholarships funded by Amazon Music Your Voice is Power aims","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+<td class='code-delete'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'></span>
+</span>
+</span>
+</td>
+</tr>
+<tr>
+<th class='code-equal'>11</th>
+<td class='code-equal'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Wed Feb 23 21:00:00 JST 2022,31531,Amazon Canada lance un nouveau programme qui enseigne le codage par le biais de la musique d'artistes autochtones,https://press.aboutamazon.com/news-releases/news-release-details/amazon-canada-lance-un-nouveau-programme-qui-enseigne-le-codage,"Amazon Canada fait équipe avec TakingITGlobal, un organisme qui engage les jeunes activement, dans le cadre d'un nouveau programme qui permet d'apprendre des compétences technologiques tout en favorisant la justice sociale Les étudients remixeront des chansons d'artistes autochtones et courront la","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+<td class='code-equal'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Wed Feb 23 21:00:00 JST 2022,31531,Amazon Canada lance un nouveau programme qui enseigne le codage par le biais de la musique d'artistes autochtones,https://press.aboutamazon.com/news-releases/news-release-details/amazon-canada-lance-un-nouveau-programme-qui-enseigne-le-codage,"Amazon Canada fait équipe avec TakingITGlobal, un organisme qui engage les jeunes activement, dans le cadre d'un nouveau programme qui permet d'apprendre des compétences technologiques tout en favorisant la justice sociale Les étudients remixeront des chansons d'artistes autochtones et courront la","Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+</tr>
+<tr>
+<th class='code-change'>12</th>
+<td class='code-change'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Wed Feb 23 </span><span class='deletion'>17:01:00</span><span class='unchanged'> JST 2022,</span><span class='deletion'>31521</span><span class='unchanged'>,</span><span class='deletion'>Maple</span><span class='unchanged'> </span><span class='deletion'>Leaf</span><span class='unchanged'> </span><span class='deletion'>Sports</span><span class='unchanged'> </span><span class='deletion'>&amp;</span><span class='unchanged'> </span><span class='deletion'>Entertainment</span><span class='unchanged'> </span><span class='deletion'>and AWS Team Up </span><span class='unchanged'>to </span><span class='deletion'>Transform</span><span class='unchanged'> </span><span class='deletion'>Experiences</span><span class='unchanged'> </span><span class='deletion'>for</span><span class='unchanged'> </span><span class='deletion'>Canadian</span><span class='unchanged'> </span><span class='deletion'>Sports</span><span class='unchanged'> </span><span class='deletion'>Fans</span><span class='unchanged'>,https://press.aboutamazon.com/news-releases/news-release-details/</span><span class='deletion'>maple</span><span class='unchanged'>-</span><span class='deletion'>leaf</span><span class='unchanged'>-</span><span class='deletion'>sports</span><span class='unchanged'>-</span><span class='deletion'>entertainment</span><span class='unchanged'>-</span><span class='deletion'>and</span><span class='unchanged'>-</span><span class='deletion'>aws</span><span class='unchanged'>-</span><span class='deletion'>team</span><span class='unchanged'>-</span><span class='deletion'>transform</span><span class='unchanged'>,</span><span class='deletion'>"MLSE</span><span class='unchanged'> </span><span class='deletion'>and</span><span class='unchanged'> </span><span class='deletion'>AWS</span><span class='unchanged'> </span><span class='deletion'>will</span><span class='unchanged'> </span><span class='deletion'>innovate</span><span class='unchanged'> </span><span class='deletion'>together</span><span class='unchanged'> </span><span class='deletion'>to</span><span class='unchanged'> </span><span class='deletion'>deliver</span><span class='unchanged'> </span><span class='deletion'>more</span><span class='unchanged'> </span><span class='deletion'>extraordinary</span><span class='unchanged'> </span><span class='deletion'>moments</span><span class='unchanged'> </span><span class='deletion'>for</span><span class='unchanged'> </span><span class='deletion'>fans</span><span class='unchanged'> </span><span class='deletion'>of</span><span class='unchanged'> </span><span class='deletion'>Toronto’s</span><span class='unchanged'> </span><span class='deletion'>premier</span><span class='unchanged'> </span><span class='deletion'>hockey,</span><span class='unchanged'> </span><span class='deletion'>basketball,</span><span class='unchanged'> </span><span class='deletion'>soccer,</span><span class='unchanged'> </span><span class='deletion'>and</span><span class='unchanged'> </span><span class='deletion'>football</span><span class='unchanged'> </span><span class='deletion'>teams,</span><span class='unchanged'> </span><span class='deletion'>and</span><span class='unchanged'> </span><span class='deletion'>aid</span><span class='unchanged'> </span><span class='deletion'>scouting</span><span class='unchanged'> and </span><span class='deletion'>coaching</span><span class='unchanged'> </span><span class='deletion'>decisions</span><span class='unchanged'> </span><span class='deletion'>SEATTLE</span><span class='unchanged'> </span><span class='deletion'>--(BUSINESS</span><span class='unchanged'> </span><span class='deletion'>WIRE)--Feb.</span><span class='unchanged'> </span><span class='deletion'>23</span><span class='unchanged'>, </span><span class='deletion'>2022--</span><span class='unchanged'> Amazon </span><span class='deletion'>Web</span><span class='unchanged'> </span><span class='deletion'>Services,</span><span class='unchanged'> </span><span class='deletion'>Inc.</span><span class='unchanged'> </span><span class='deletion'>(AWS),</span><span class='unchanged'> </span><span class='deletion'>an</span><span class='unchanged'> </span><span class='deletion'>Amazon.com </span><span class='unchanged'>,</span><span class='deletion'> Inc.",</span><span class='unchanged'>"Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+<td class='code-change'>
+<span class='blob-code-inner'><span class='blob-code-inner'><span class='unchanged'>Wed Feb 23 </span><span class='insertion'>21:00:00</span><span class='unchanged'> JST 2022,</span><span class='insertion'>31566</span><span class='unchanged'>,</span><span class='insertion'>Amazon</span><span class='unchanged'> </span><span class='insertion'>Canada</span><span class='unchanged'> </span><span class='insertion'>launches</span><span class='unchanged'> </span><span class='insertion'>new</span><span class='unchanged'> </span><span class='insertion'>program</span><span class='unchanged'> to </span><span class='insertion'>teach</span><span class='unchanged'> </span><span class='insertion'>coding</span><span class='unchanged'> </span><span class='insertion'>through</span><span class='unchanged'> </span><span class='insertion'>music</span><span class='unchanged'> </span><span class='insertion'>from</span><span class='unchanged'> </span><span class='insertion'>Indigenous artists</span><span class='unchanged'>,https://press.aboutamazon.com/news-releases/news-release-details/</span><span class='insertion'>amazon</span><span class='unchanged'>-</span><span class='insertion'>canada</span><span class='unchanged'>-</span><span class='insertion'>launches</span><span class='unchanged'>-</span><span class='insertion'>new</span><span class='unchanged'>-</span><span class='insertion'>program</span><span class='unchanged'>-</span><span class='insertion'>teach</span><span class='unchanged'>-</span><span class='insertion'>coding</span><span class='unchanged'>-</span><span class='insertion'>through-music</span><span class='unchanged'>,</span><span class='insertion'>"Amazon Canada partners</span><span class='unchanged'> </span><span class='insertion'>with</span><span class='unchanged'> </span><span class='insertion'>youth</span><span class='unchanged'> </span><span class='insertion'>empowerment</span><span class='unchanged'> </span><span class='insertion'>charity</span><span class='unchanged'> </span><span class='insertion'>TakingITGlobal</span><span class='unchanged'> </span><span class='insertion'>for</span><span class='unchanged'> </span><span class='insertion'>a</span><span class='unchanged'> </span><span class='insertion'>new</span><span class='unchanged'> </span><span class='insertion'>program</span><span class='unchanged'> </span><span class='insertion'>that</span><span class='unchanged'> </span><span class='insertion'>builds</span><span class='unchanged'> </span><span class='insertion'>technology</span><span class='unchanged'> </span><span class='insertion'>skills</span><span class='unchanged'> </span><span class='insertion'>while</span><span class='unchanged'> </span><span class='insertion'>promoting</span><span class='unchanged'> </span><span class='insertion'>social</span><span class='unchanged'> </span><span class='insertion'>justice</span><span class='unchanged'> </span><span class='insertion'>Students</span><span class='unchanged'> </span><span class='insertion'>will</span><span class='unchanged'> </span><span class='insertion'>remix</span><span class='unchanged'> </span><span class='insertion'>music</span><span class='unchanged'> </span><span class='insertion'>from</span><span class='unchanged'> </span><span class='insertion'>Indigenous</span><span class='unchanged'> </span><span class='insertion'>artists</span><span class='unchanged'> and </span><span class='insertion'>enter</span><span class='unchanged'> </span><span class='insertion'>for</span><span class='unchanged'> </span><span class='insertion'>the</span><span class='unchanged'> </span><span class='insertion'>chance</span><span class='unchanged'> </span><span class='insertion'>to</span><span class='unchanged'> </span><span class='insertion'>win $5</span><span class='unchanged'>,</span><span class='insertion'>000 scholarships</span><span class='unchanged'> </span><span class='insertion'>funded</span><span class='unchanged'> </span><span class='insertion'>by </span><span class='unchanged'>Amazon </span><span class='insertion'>Music</span><span class='unchanged'> </span><span class='insertion'>Your</span><span class='unchanged'> </span><span class='insertion'>Voice</span><span class='unchanged'> </span><span class='insertion'>is</span><span class='unchanged'> </span><span class='insertion'>Power</span><span class='unchanged'> </span><span class='insertion'>aims"</span><span class='unchanged'>,"Amazon.com, Inc. - Press Room News Releases"</span>
+</span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
