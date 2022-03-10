@@ -1,7 +1,7 @@
-plugins {
-  id 'groovy'
-}
-
+/**
+ * Visual Inspection of Excel and PDF/build.gradle
+ */
+ 
 version = '0.2.2'
 
 ext {
