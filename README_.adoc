@@ -32,7 +32,7 @@ My solution should:
 - store the previous versions of .xlsx file somewhere so that the software can compare the current one against.
 3. If any updates found, take some action. For example, transfer the .xlsx files into some organizational file server and send some notification to those who are concerned: send messages to MQ and E-mail etc.
 
-The 1st problem (running a process regularly and automatically) will be implemented using Linux https://en.wikipedia.org/wiki/Cron[cron], Windows https://docs.microsoft.com/en-us/windows/win32/taskschd/about-the-task-scheduler[Task Scheduler], and some Continuous Integration servers like https://www.jetbrains.com/teamcity/[Team City]. Katalon offers https://www.katalon.com/testops/[Test Ops] of course.
+The 1st problem (running a process regularly and automatically) will be implemented using Linux https://en.wikipedia.org/wiki/Cron[cron], Windows https://docs.microsoft.com/en-us/windows/win32/taskschd/about-the-task-scheduler[Task Scheduler], and some Continuous Integration servers like https://www.jenkins.io/[Jenkins].
 
 The 3rd problem (taking some actions when your script find it necessary) will be solved by straight-forward custom programming. This would deserve another planning and efforts.
 

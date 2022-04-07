@@ -1,6 +1,7 @@
 import java.util.function.BiFunction
 
 import com.kazurayam.materialstore.Inspector
+import com.kazurayam.materialstore.filesystem.JobTimestamp
 import com.kazurayam.materialstore.filesystem.MaterialList
 import com.kazurayam.materialstore.reduce.MProductGroup
 import com.kazurayam.materialstore.reduce.MProductGroupBuilder
@@ -12,14 +13,15 @@ import com.kazurayam.materialstore.reduce.MProductGroupBuilder
 assert store != null
 assert currentMaterialList != null
 
-BiFunction<MaterialList, MaterialList, MProductGroup> func = {
-    MaterialList left, MaterialList right ->
-	    MProductGroup.builder(left, right)
-		    .build()
-}
+// want to look up the list of previous materials stored sometime in the last month
+JobTimestamp beginningOfTheMonth = currentMaterialList.getJobTimestamp().beginningOfTheMonth()
 
-MProductGroup prepared = MProductGroupBuilder.chronos(store, currentMaterialList, func)
+MProductGroup prepared = 
+	MProductGroupBuilder.chronos(store, currentMaterialList, beginningOfTheMonth)
+	 
 assert prepared != null
+
+//println prepared.toJson(true)
 
 Inspector inspector = Inspector.newInstance(store)
 MProductGroup reduced = inspector.reduce(prepared)

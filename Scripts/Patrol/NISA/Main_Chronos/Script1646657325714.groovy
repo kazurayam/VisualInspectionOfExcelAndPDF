@@ -66,11 +66,14 @@ MaterialList currentMaterialList =
 // lookup a previous jobTimesamp directory.
 // compare the current materials with the previos one
 // in order to find differences between the 2 versions. --- Chronos mode
+
+	//print "currentMaterialList=" + currentMaterialList.toJson(true)
+	
 MProductGroup reduced =
 	WebUI.callTestCase(findTestCase("Patrol/NISA/reduce"),
 		["store": store, "currentMaterialList": currentMaterialList ])
 
-println JsonOutput.prettyPrint(reduced.toString())
+//println JsonOutput.prettyPrint(reduced.toString())
 
 //---------------------------------------------------------------------
 /*
@@ -87,5 +90,5 @@ int warnings =
  * Epilogue
  */
 if (warnings > 0) {
-	KeywordUtil.markWarning("found ${warnings} differences.")
+	KeywordUtil.markWarning("found ${warnings} different file(s).")
 }

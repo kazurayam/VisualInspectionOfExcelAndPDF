@@ -25,10 +25,9 @@ JobTimestamp workingTimestamp = JobTimestamp.laterThan(jobTimestamp)
  *  convert Excel *.xlsx files into *.csv
  */
 // lookup xlsx files
-MaterialList excelMaterials = store.select(jobName, jobTimestamp,
-	QueryOnMetadata.builder(metadata).build(),
-	FileType.XLSX)
-assert excelMaterials.size()> 0
+QueryOnMetadata query = QueryOnMetadata.builder(metadata).build()
+MaterialList excelMaterials = store.select(jobName, jobTimestamp, query, FileType.XLSX)
+assert excelMaterials.size() > 0
 
 // setup the mapper
 Mapper mapper = new Excel2CSVMapperPOI3();

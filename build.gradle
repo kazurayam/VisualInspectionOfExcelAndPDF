@@ -2,7 +2,7 @@
  * Visual Inspection of Excel and PDF/build.gradle
  */
  
-version = '0.2.2'
+version = '0.6.0'
 
 ext {
   AUTO_IMPORTED_JAR_PREFIX = 'AUTOIMPORTED_'
@@ -18,33 +18,19 @@ configurations {
 }
 
 dependencies {
-    myconf group: 'com.kazurayam', name: 'materialstore', version: '0.4.10'
-    myconf group: 'com.kazurayam', name: 'materialstore-mapper', version: '0.2.0'
-
-    // https://mvnrepository.com/artifact/org.apache.poi/poi
+    myconf group: 'com.kazurayam', name: 'materialstore', version: '0.6.2'
+    myconf group: 'com.kazurayam', name: 'kazurayam_FreeMarker_directives', version: '0.2.0'
+    myconf group: 'com.kazurayam', name: 'materialstore-mapper', version: '0.6.0'
+    myconf group: 'org.freemarker', name: 'freemarker', version: "2.3.31"
+    
     myconf group: 'org.apache.poi', name: 'poi', version: '3.17'
-    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
     myconf group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
-
-    // https://mvnrepository.com/artifact/org.apache.commons/commons-csv
     myconf group: 'org.apache.commons', name: 'commons-csv', version: '1.9.0'
-
-    // https://mvnrepository.com/artifact/net.sf.cssbox/pdf2dom
     myconf group: 'net.sf.cssbox', name: 'pdf2dom', version: '2.0.1'
-
-    // https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox
     myconf group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.25'
-
-    // https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox-tools
     myconf group: 'org.apache.pdfbox', name: 'pdfbox-tools', version: '2.0.25'
-
-    // https://mvnrepository.com/artifact/com.rometools/rome
     myconf group: 'com.rometools', name: 'rome', version: '1.18.0'
-
-    // https://mvnrepository.com/artifact/org.jdom/jdom2
     myconf group: 'org.jdom', name: 'jdom2', version: '2.0.6.1'
-
-
 }
 
 task drivers {
@@ -61,6 +47,8 @@ task drivers {
                 .include(
                     "**/materialstore*.jar",
                     "**/materialstore-mapper*.jar",
+                    "**/kazurayam_FreeMarker_directives*.jar",
+                    "**/freemarker*.jar",
                     "**/ExecutionProfilesLoader*.jar",
                     "**/ashot*.jar",
                     "**/jsoup*.jar",

@@ -1,52 +1,52 @@
-#!/usr/bin/env bash
+#!/Usr/Bin/Env Bash
 
-# Convert all the files with name ending with `*.adoc` into `*.md`.
-# `*.adoc` is an Asciidoc document file, `*.md` is a Mardown document file.
-# E.g, `readme_.adoc` will be converted into `readme_.md`
-# Except ones with `_` as prefix.
-# E.g, `_readme.adoc` is NOT processed by this script, will be left unprocessed.
+# Convert All The Files With Name Ending With `*.Adoc` Into `*.Md`.
+# `*.Adoc` Is An Asciidoc Document File, `*.Md` Is A Mardown Document File.
+# E.G, `Readme_.Adoc` Will Be Converted Into `Readme_.Md`
+# Except Ones With `_` As Prefix.
+# E.G, `_Readme.Adoc` Is Not Processed By This Script, Will Be Left Unprocessed.
 #
-# How to active this: in the command line, just type
-# `> ./readmeconv.sh`
+# How To Active This: In The Command Line, Just Type
+# `> ./Readmeconv.Sh`
 #
-# Can generate Table of content in the output *.md file by specifying `-t` option
-# `> ./readmeconv.sh -t`
+# Can Generate Table Of Content In The Output *.Md File By Specifying `-T` Option
+# `> ./Readmeconv.Sh -T`
 
-requireTOC=false
+Requiretoc=False
 
-optstring="t"
-while getopts ${optstring} arg; do
-    case ${arg} in
-        t)
-            requireTOC=true
+Optstring="T"
+While Getopts ${Optstring} Arg; Do
+    Case ${Arg} In
+        T)
+            Requiretoc=True
             ;;
         ?)
             ;;
-    esac
-done
+    Esac
+Done
 
-find . -iname "*.adoc" -type f -maxdepth 1 -not -name "_*.adoc" | while read fname; do
-    target=${fname//adoc/md}
-    xml=${fname//adoc/xml}
-    echo "converting $fname into $target"
-    # converting a *.adoc into a docbook
-    asciidoctor -b docbook -a leveloffset=+1 -o - "$fname" > "$xml"
-    if [ $requireTOC = true ]; then
-      # generate a Markdown file with Table of contents
-      cat "$xml" | pandoc --standalone --toc --markdown-headings=atx --wrap=preserve -t markdown_strict -f docbook - > "$target"
-    else
-      # without TOC
-      cat "$xml" | pandoc --markdown-headings=atx --wrap=preserve -t markdown_strict -f docbook - > "$target"
-    fi
-    echo deleting $xml
-    rm -f "$xml"
-done
+Find . -Iname "*.Adoc" -Type F -Maxdepth 1 -Not -Name "_*.Adoc" | While Read Fname; Do
+    Target=${Fname//Adoc/Md}
+    Xml=${Fname//Adoc/Xml}
+    Echo "Converting $Fname Into $Target"
+    # Converting A *.Adoc Into A Docbook
+    Asciidoctor -B Docbook -A Leveloffset=+1 -O - "$Fname" > "$Xml"
+    If [ $Requiretoc = True ]; Then
+      # Generate A Markdown File With Table Of Contents
+      Cat "$Xml" | Pandoc --Standalone --Toc --Markdown-Headings=Atx --Wrap=Preserve -T Markdown_Strict -F Docbook - > "$Target"
+    Else
+      # Without Toc
+      Cat "$Xml" | Pandoc --Markdown-Headings=Atx --Wrap=Preserve -T Markdown_Strict -F Docbook - > "$Target"
+    Fi
+    Echo Deleting $Xml
+    Rm -F "$Xml"
+Done
 
-# if we find a readme*.md (or README*.md),
-# we rename all of them to a single README.md while overwriting,
-# effectively the last wins.
-# E.g, if we have `readme_.md`, it will be overwritten into `README.md`
-find . -iname "readme*.md" -not -name "README.md" -type f -maxdepth 1 | while read fname; do
-    echo Renaming $fname to README.md
-    mv $fname README.md
-done
+# If We Find A Readme*.Md (Or Readme*.Md),
+# We Rename All Of Them To A Single Readme.Md While Overwriting,
+# Effectively The Last Wins.
+# E.G, If We Have `Readme_.Md`, It Will Be Overwritten Into `Readme.Md`
+Find . -Iname "Readme*.Md" -Not -Name "Readme.Md" -Type F -Maxdepth 1 | While Read Fname; Do
+    Echo Renaming $Fname To Readme.Md
+    Mv $Fname Readme.Md
+Done

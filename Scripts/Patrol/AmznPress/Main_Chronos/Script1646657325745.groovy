@@ -75,5 +75,5 @@ int warnings =
  * Epilogue
  */
 if (warnings > 0) {
-	KeywordUtil.markWarning("found ${warnings} differences.")
+	KeywordUtil.markWarning("found ${warnings} different file(s).")
 }
