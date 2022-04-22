@@ -14,7 +14,6 @@ import com.kazurayam.materialstore.materialize.URLMaterializer
  */
 
 assert rssUrl != null
-
 assert store != null
 assert jobName != null
 assert jobTimestamp != null
@@ -36,12 +35,12 @@ rss2excel.map(rssMaterial)
 Mapper excel2csv = new Excel2CSVMapperPOI3()
 excel2csv.setStore(store)
 excel2csv.setMappingListener(serializer)
-Material excelMaterial = store.selectSingle(jobName, jobTimestamp, QueryOnMetadata.ANY, FileType.XLSX)
+Material excelMaterial = store.selectSingle(jobName, jobTimestamp, FileType.XLSX, QueryOnMetadata.ANY)
 excel2csv.map(excelMaterial)
 
 
 // 4. construct a MaterialList which contains only CSV file, and return nit
-MaterialList csvList = store.select(jobName, jobTimestamp, QueryOnMetadata.ANY, FileType.CSV)
+MaterialList csvList = store.select(jobName, jobTimestamp, FileType.CSV, QueryOnMetadata.ANY)
 assert csvList.size() == 1
 
 return csvList

@@ -2,7 +2,7 @@
  * Visual Inspection of Excel and PDF/build.gradle
  */
  
-version = '0.6.0'
+version = '0.8.0'
 
 ext {
   AUTO_IMPORTED_JAR_PREFIX = 'AUTOIMPORTED_'
@@ -18,7 +18,7 @@ configurations {
 }
 
 dependencies {
-    myconf group: 'com.kazurayam', name: 'materialstore', version: '0.7.0'
+    myconf group: 'com.kazurayam', name: 'materialstore', version: '0.8.0'
     myconf group: 'com.kazurayam', name: 'materialstore-mapper', version: '0.6.0'
     myconf group: 'com.kazurayam', name: 'kazurayam_FreeMarker_directives', version: '0.2.0'
     myconf group: 'org.jsoup', name: 'jsoup', version: '1.14.3'

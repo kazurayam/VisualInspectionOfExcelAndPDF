@@ -21,22 +21,22 @@ assert jobTimestamp != null
 WebUI.comment("materialize started; jobTimestamp=${jobTimestamp}, jobName=${jobName}, store=${store}, pageUrl=${pageUrl}")
 
 
-List<Target> targets = new ArrayList<>()
-targets.add(new Target("(//a[text()='EXCEL'])[1]", FileType.XLSX))
-targets.add(new Target("(//a[text()='EXCEL'])[2]", FileType.XLSX))
-targets.add(new Target("(//a[text()='EXCEL'])[3]", FileType.XLSX))
-targets.add(new Target("(//a[text()='EXCEL'])[4]", FileType.XLSX))
-targets.add(new Target("(//a[text()='PDF'])[1]", FileType.PDF))
-targets.add(new Target("(//a[text()='PDF'])[2]", FileType.PDF))
-targets.add(new Target("(//a[text()='PDF'])[3]", FileType.PDF))
-targets.add(new Target("(//a[text()='PDF'])[4]", FileType.PDF))
+List<Subject> subjects = new ArrayList<>()
+subjects.add(new Subject("(//a[text()='EXCEL'])[1]", FileType.XLSX))
+subjects.add(new Subject("(//a[text()='EXCEL'])[2]", FileType.XLSX))
+subjects.add(new Subject("(//a[text()='EXCEL'])[3]", FileType.XLSX))
+subjects.add(new Subject("(//a[text()='EXCEL'])[4]", FileType.XLSX))
+subjects.add(new Subject("(//a[text()='PDF'])[1]", FileType.PDF))
+subjects.add(new Subject("(//a[text()='PDF'])[2]", FileType.PDF))
+subjects.add(new Subject("(//a[text()='PDF'])[3]", FileType.PDF))
+subjects.add(new Subject("(//a[text()='PDF'])[4]", FileType.PDF))
 
 WebUI.openBrowser("")
 WebUI.navigateToUrl(pageUrl.toExternalForm())
 
-for (int i = 0; i < targets.size(); i++) {
+for (int i = 0; i < subjects.size(); i++) {
 	// identify the target
-	Target target = targets.get(i);
+	Subject target = subjects.get(i);
 	String relativeHref = WebUI.getAttribute(target.getLocator(), "href")
 	assert relativeHref != null
 	URL materialUrl = URLResolver.resolve(pageUrl, relativeHref)
@@ -60,10 +60,10 @@ WebUI.closeBrowser()
  * Helper classes, helper functions
  */
 
-class Target {
+class Subject {
 	private TestObject locator
 	private FileType fileType
-	Target(String expr, FileType fileType) {
+	Subject(String expr, FileType fileType) {
 		this.locator = byXPath(expr)
 		this.fileType = fileType
 	}

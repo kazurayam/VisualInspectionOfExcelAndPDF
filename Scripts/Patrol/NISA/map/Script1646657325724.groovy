@@ -26,7 +26,8 @@ JobTimestamp workingTimestamp = JobTimestamp.laterThan(jobTimestamp)
  */
 // lookup xlsx files
 QueryOnMetadata query = QueryOnMetadata.builder(metadata).build()
-MaterialList excelMaterials = store.select(jobName, jobTimestamp, query, FileType.XLSX)
+MaterialList excelMaterials = 
+		store.select(jobName, jobTimestamp, FileType.XLSX, query)
 assert excelMaterials.size() > 0
 
 // setup the mapper
@@ -42,8 +43,8 @@ for (Material xlsxMaterial : excelMaterials) {
 }
 
 // ensure CSV files are created
-MaterialList csvMaterials = store.select(jobName, workingTimestamp,
-	QueryOnMetadata.ANY, FileType.CSV)
+MaterialList csvMaterials = 
+		store.select(jobName, workingTimestamp, FileType.CSV, QueryOnMetadata.ANY)
 assert csvMaterials.size() > 0
 
 // return the name of newly created directory
