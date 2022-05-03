@@ -4,7 +4,7 @@ import com.kazurayam.materialstore.Inspector
 import com.kazurayam.materialstore.filesystem.JobTimestamp
 import com.kazurayam.materialstore.filesystem.MaterialList
 import com.kazurayam.materialstore.reduce.MProductGroup
-import com.kazurayam.materialstore.reduce.MProductGroupBuilder
+import com.kazurayam.materialstore.reduce.Reducer
 
 /**
  * Test Cases/Patrol/NISA/reduce
@@ -16,14 +16,13 @@ assert currentMaterialList != null
 // want to look up the list of previous materials stored sometime in the last month
 JobTimestamp beginningOfTheMonth = currentMaterialList.getJobTimestamp().beginningOfTheMonth()
 
-MProductGroup prepared = 
-	MProductGroupBuilder.chronos(store, currentMaterialList, beginningOfTheMonth)
-	 
-assert prepared != null
+MProductGroup reduced = 
+	Reducer.chronos(store, currentMaterialList, beginningOfTheMonth)
+assert reduced != null
 
 //println prepared.toJson(true)
 
 Inspector inspector = Inspector.newInstance(store)
-MProductGroup reduced = inspector.reduce(prepared)
+MProductGroup processed = inspector.process(reduced)
 
-return reduced    
+return processed
