@@ -10,7 +10,7 @@ import com.kazurayam.materialstore.filesystem.Store
 import com.kazurayam.materialstore.filesystem.Stores
 import com.kazurayam.materialstore.filesystem.Metadata
 import com.kazurayam.materialstore.filesystem.QueryOnMetadata
-import com.kazurayam.materialstore.reduce.MProductGroup
+import com.kazurayam.materialstore.reduce.MaterialProductGroup
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
@@ -54,7 +54,7 @@ MaterialList currentMaterialList =
 // lookup a previous jobTimesamp directory.
 // compare the current materials with the previos one
 // in order to find differences between the 2 versions. --- Chronos mode
-MProductGroup reduced =
+MaterialProductGroup reduced =
 	WebUI.callTestCase(findTestCase("Patrol/AmznPress/reduce"),
 		["store": store, "currentMaterialList": currentMaterialList ])
 

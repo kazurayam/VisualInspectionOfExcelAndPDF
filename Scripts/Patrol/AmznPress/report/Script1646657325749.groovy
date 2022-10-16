@@ -1,7 +1,7 @@
 import java.nio.file.Files
 import java.nio.file.Path
 
-import com.kazurayam.materialstore.Inspector
+import com.kazurayam.materialstore.inspector.Inspector
 import com.kazurayam.materialstore.filesystem.JobName
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
@@ -16,7 +16,8 @@ assert criteria != null
 /**
  * Test Cases/missions/AmznPress/report
  */
-WebUI.comment("report started; criteria=${criteria}, mProductGroup=${mProductGroup.getDescription()}, store=${store}")
+WebUI.comment("report started; store=${store}")
+println "mProductGroup.toSummary()=" + mProductGroup.toSummary()
 
 JobName jobName = mProductGroup.getJobName()
 

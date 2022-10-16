@@ -10,7 +10,7 @@ import com.kazurayam.materialstore.filesystem.Store
 import com.kazurayam.materialstore.filesystem.Stores
 import com.kazurayam.materialstore.filesystem.Metadata
 import com.kazurayam.materialstore.filesystem.QueryOnMetadata
-import com.kazurayam.materialstore.reduce.MProductGroup
+import com.kazurayam.materialstore.reduce.MaterialProductGroup
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
@@ -69,7 +69,7 @@ MaterialList currentMaterialList =
 
 	//print "currentMaterialList=" + currentMaterialList.toJson(true)
 	
-MProductGroup reduced =
+MaterialProductGroup reduced =
 	WebUI.callTestCase(findTestCase("Patrol/NISA/reduce"),
 		["store": store, "currentMaterialList": currentMaterialList ])
 

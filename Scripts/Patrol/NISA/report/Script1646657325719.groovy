@@ -1,8 +1,9 @@
 import java.nio.file.Files
 import java.nio.file.Path
 
-import com.kazurayam.materialstore.Inspector
+import com.kazurayam.materialstore.inspector.Inspector
 import com.kazurayam.materialstore.filesystem.JobName
+import com.kazurayam.materialstore.filesystem.SortKeys
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 /**
@@ -16,7 +17,8 @@ assert criteria != null
 /**
  * Test Cases/missions/NISA/report
  */
-WebUI.comment("report started; criteria=${criteria}, mProductGroup=${mProductGroup.getDescription()}, store=${store}")
+WebUI.comment("report started; store=${store}")
+println "mProductGroup.toSummary()=" + mProductGroup.toSummary()
 
 JobName jobName = mProductGroup.getJobName()
 
@@ -24,6 +26,8 @@ JobName jobName = mProductGroup.getJobName()
 String fileName = jobName.toString()+ "-index.html"
 
 Inspector inspector = Inspector.newInstance(store)
+SortKeys sortKeys = new SortKeys("seq", "sheet_index", "sheet_name")
+inspector.setSortKeys(sortKeys)
 Path report = inspector.report(mProductGroup, criteria, fileName)
 
 assert Files.exists(report)
