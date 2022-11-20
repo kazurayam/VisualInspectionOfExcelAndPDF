@@ -1,13 +1,13 @@
-import com.kazurayam.materialstore.filesystem.FileType
-import com.kazurayam.materialstore.filesystem.Material
-import com.kazurayam.materialstore.filesystem.MaterialList
-import com.kazurayam.materialstore.filesystem.QueryOnMetadata
-import com.kazurayam.materialstore.map.MappedResultSerializer
-import com.kazurayam.materialstore.map.Mapper
-import com.kazurayam.materialstore.map.MappingListener
+import com.kazurayam.materialstore.base.materialize.URLMaterializer
+import com.kazurayam.materialstore.core.filesystem.FileType
+import com.kazurayam.materialstore.core.filesystem.Material
+import com.kazurayam.materialstore.core.filesystem.MaterialList
+import com.kazurayam.materialstore.core.filesystem.QueryOnMetadata
+import com.kazurayam.materialstore.core.map.MappedResultSerializer
+import com.kazurayam.materialstore.core.map.Mapper
+import com.kazurayam.materialstore.core.map.MappingListener
 import com.kazurayam.materialstore.mapper.Excel2CSVMapperPOI3
 import com.kazurayam.materialstore.mapper.RSSAmznPress2ExcelMapper
-import com.kazurayam.materialstore.materialize.URLMaterializer
 
 /**
  * Test Cases/Patrol/AmznPress/materialize_map_map

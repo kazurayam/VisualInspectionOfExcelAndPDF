@@ -3,8 +3,8 @@ import java.nio.file.Path
 
 import com.kazurayam.ks.URLDownloader
 import com.kazurayam.ks.URLResolver
-import com.kazurayam.materialstore.filesystem.FileType
-import com.kazurayam.materialstore.filesystem.Metadata
+import com.kazurayam.materialstore.core.filesystem.FileType
+import com.kazurayam.materialstore.core.filesystem.Metadata
 import com.kms.katalon.core.testobject.ConditionType
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI

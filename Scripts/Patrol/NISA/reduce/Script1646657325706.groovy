@@ -1,10 +1,7 @@
-import java.util.function.BiFunction
-
-import com.kazurayam.materialstore.inspector.Inspector
-import com.kazurayam.materialstore.filesystem.JobTimestamp
-import com.kazurayam.materialstore.filesystem.MaterialList
-import com.kazurayam.materialstore.reduce.MaterialProductGroup
-import com.kazurayam.materialstore.reduce.Reducer
+import com.kazurayam.materialstore.base.inspector.Inspector
+import com.kazurayam.materialstore.base.reduce.MaterialProductGroup
+import com.kazurayam.materialstore.base.reduce.Reducer
+import com.kazurayam.materialstore.core.filesystem.JobTimestamp
 
 /**
  * Test Cases/Patrol/NISA/reduce
@@ -16,13 +13,13 @@ assert currentMaterialList != null
 // want to look up the list of previous materials stored sometime in the last month
 JobTimestamp beginningOfTheMonth = currentMaterialList.getJobTimestamp().beginningOfTheMonth()
 
-MaterialProductGroup reduced = 
+MaterialProductGroup mpg = 
 	Reducer.chronos(store, currentMaterialList, beginningOfTheMonth)
-assert reduced != null
+assert mpg != null
 
 //println prepared.toJson(true)
 
 Inspector inspector = Inspector.newInstance(store)
-MaterialProductGroup inspected = inspector.reduceAndSort(reduced)
+MaterialProductGroup reduced = inspector.reduceAndSort(mpg)
 
-return inspected
+return reduced

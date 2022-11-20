@@ -1,9 +1,9 @@
 import java.util.function.BiFunction
 
-import com.kazurayam.materialstore.inspector.Inspector
-import com.kazurayam.materialstore.filesystem.MaterialList
-import com.kazurayam.materialstore.reduce.MaterialProductGroup
-import com.kazurayam.materialstore.reduce.Reducer
+import com.kazurayam.materialstore.base.inspector.Inspector
+import com.kazurayam.materialstore.core.filesystem.MaterialList
+import com.kazurayam.materialstore.base.reduce.MaterialProductGroup
+import com.kazurayam.materialstore.base.reduce.Reducer
 import groovy.json.JsonOutput
 
 /**

@@ -3,17 +3,16 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import java.nio.file.Path
 import java.nio.file.Paths
 
-import com.kazurayam.materialstore.filesystem.JobName
-import com.kazurayam.materialstore.filesystem.JobTimestamp
-import com.kazurayam.materialstore.filesystem.MaterialList
-import com.kazurayam.materialstore.filesystem.Store
-import com.kazurayam.materialstore.filesystem.Stores
-import com.kazurayam.materialstore.filesystem.Metadata
-import com.kazurayam.materialstore.filesystem.QueryOnMetadata
-import com.kazurayam.materialstore.reduce.MaterialProductGroup
+import com.kazurayam.materialstore.base.reduce.MaterialProductGroup
+import com.kazurayam.materialstore.core.filesystem.JobName
+import com.kazurayam.materialstore.core.filesystem.JobTimestamp
+import com.kazurayam.materialstore.core.filesystem.MaterialList
+import com.kazurayam.materialstore.core.filesystem.Store
+import com.kazurayam.materialstore.core.filesystem.Stores
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+
 import groovy.json.JsonOutput
 
 /**
