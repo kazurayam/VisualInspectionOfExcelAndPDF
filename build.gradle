@@ -2,10 +2,10 @@
  * Visual Inspection of Excel and PDF/build.gradle
  */
 
-version = '0.12.5'
+version = '0.13.1-SNAPSHOT'
 
 ext {
-  AUTO_IMPORTED_JAR_PREFIX = 'AUTOIMPORTED_'
+  ADDITIONAL_JAR_PREFIX = 'ADDITIONAL_'
 }
 
 repositories {
@@ -18,7 +18,8 @@ configurations {
 }
 
 dependencies {
-    myconf group: 'com.kazurayam', name: 'materialstore', version: '0.12.5'
+    myconf group: 'com.kazurayam', name: 'materialstore', version: '0.13.1-SNAPSHOT'
+    myconf group: 'com.kazurayam', name: 'inspectus4selenium', version: '0.2.0-SNAPSHOT'
     myconf group: 'org.jsoup', name: 'jsoup', version: '1.14.3'
     myconf group: 'io.github.java-diff-utils', name: 'java-diff-utils', version: "4.9"
     myconf group: 'org.freemarker', name: 'freemarker', version: "2.3.31"
@@ -36,7 +37,7 @@ dependencies {
 task drivers {
     doFirst {
         delete fileTree("Drivers") {
-            include("**/" + AUTO_IMPORTED_JAR_PREFIX + "*")
+            include("**/" + ADDITIONAL_JAR_PREFIX + "*")
         }
     }
     doLast {
@@ -46,6 +47,7 @@ task drivers {
                 .into("Drivers")
                 .include(
                     "**/materialstore*.jar",
+                    "**/inspectus4selenium*.jar",
                     "**/freemarker*.jar",
                     "**/jsoup*.jar",
                     "**/java-diff-utils*.jar",
@@ -59,7 +61,7 @@ task drivers {
                     "**/jdom*.jar"
                     )
                 .rename({ s ->
-                    AUTO_IMPORTED_JAR_PREFIX + s
+                    ADDITIONAL_JAR_PREFIX + s
                     })
         }
     }
