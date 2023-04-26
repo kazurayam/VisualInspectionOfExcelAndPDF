@@ -2,8 +2,8 @@ import java.nio.file.Files
 import java.nio.file.Path
 
 import com.kazurayam.materialstore.base.inspector.Inspector
-import com.kazurayam.materialstore.core.filesystem.JobName
-import com.kazurayam.materialstore.core.filesystem.SortKeys
+import com.kazurayam.materialstore.core.JobName
+import com.kazurayam.materialstore.core.SortKeys
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 /**

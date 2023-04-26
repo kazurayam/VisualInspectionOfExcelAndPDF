@@ -1,7 +1,7 @@
 import com.kazurayam.materialstore.base.inspector.Inspector
 import com.kazurayam.materialstore.base.reduce.MaterialProductGroup
 import com.kazurayam.materialstore.base.reduce.Reducer
-import com.kazurayam.materialstore.core.filesystem.JobTimestamp
+import com.kazurayam.materialstore.core.JobTimestamp
 
 /**
  * Test Cases/Patrol/NISA/reduce

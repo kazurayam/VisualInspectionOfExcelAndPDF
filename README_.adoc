@@ -1,8 +1,8 @@
 = Visual inspection of Excel and PDF
 
-This is a https://www.katalon.com/katalon-studio/[Katalon Studio] project for demonstration purpose. You can download a zip of this project at https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/releases/tag/0.2.0[Releases] page, unzip and open your local Katalon Studio.
+This is a https://www.katalon.com/katalon-studio/[Katalon Studio] project for demonstration purpose. You can download a zip of this project at link:https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/releases/[Releases] page, unzip and open it in your local Katalon Studio.
 
-This project was developed using Katalon Studio v0.8.2 (Free License). But it should work with any version of KS as it uses only the stable parts of KS.
+This project was developed using Katalon Studio v0.8.2 (Free License). But it should work with any version of Katalon Studio.
 
 == Motivation
 
@@ -10,39 +10,39 @@ A few years ago, I worked for a media company. I was asked to develop a tool sof
 
 image:./docs/images/01_NISA_target_page.png[alt=target,width=640]
 
-You don't need to understand this page in detail except the following points.
+You don't need to understand Japanese in this page. Just note the following points.
 
 1. The page contains several links `<a href="...">EXCEL</a>` tags to the URLs of Excel files. It contains links to PDF files `<a href="...">PDF</a>` as well.
-2. The content of Excel & PDF files are updated by the publisher irregularly. The frequency of updates are not determined. By tracking the record, I see once a month, or once per 2 months.
+2. The content of Excel & PDF files are updated by the publisher irregularly. The frequency of updates are not determined. By tracking the historical records, I see updates are made once a month, or once per 2 months.
 3. The URL string of Excel/PDF files are fixed. The file names won't change at updates.
-4. The publisher does not provide any push-style notification (like https://en.wikipedia.org/wiki/RSS[RSS]) for this page. The publisher expects that those who are interested in the information of this page should continue watching the page as often as possible.
-5. The company I worked for had a serious interest in the Excel files. Some employees were asked to visit this page everyday. They were asked, when found updates, to trigger an action to process the Excel files.
+4. The publisher does not provide any push-style notification (like https://en.wikipedia.org/wiki/RSS[RSS]) for this page. The publisher expects that those who are interested in the information of this page should continue watching the page to notify themselves of any updates.
+5. The company I worked for had a serious interest in the Excel files. Some employees were asked to visit this page everyday. When they found any updates, they downloaded the PDF/Excel files and triggered to process the files. Obviously this mission was boring.
 6. The employees hated this job. They wanted some system to automate this bullshit job.
 
-Since then I worked long to solve this problem. Finally I have got a solution. Let me describe it.
+Since then I worked long and finally I have got a solution. Let me describe it.
 
 == Problem to solve
 
 My solution should:
 
-1. visit the web page regularly and automatically, for example once a day
+1. visit the web page regularly and automatically; e.g, once a day and every business days.
 2. compare the content of Excel files visually:
-- download the current version of .xlsx files, compare the content with some version to find if any updates there are.
+- download the current version of .xlsx files, compare the content with some previous version to find if any updates there are.
 - report the result of comparison in a human-readable format so that the staff can check what occured.
-- store the previous versions of .xlsx file somewhere so that the software can compare the current one against.
+- store the latest version of .pdf and .xlsx files somewhere. Later the software will use them as comparison basis.
 3. If any updates found, take some action. For example, transfer the .xlsx files into some organizational file server and send some notification to those who are concerned: send messages to MQ and E-mail etc.
 
-The 1st problem (running a process regularly and automatically) will be implemented using Linux https://en.wikipedia.org/wiki/Cron[cron], Windows https://docs.microsoft.com/en-us/windows/win32/taskschd/about-the-task-scheduler[Task Scheduler], and some Continuous Integration servers like https://www.jenkins.io/[Jenkins].
+The 1st problem (running a process regularly and automatically) can be achieved using Linux https://en.wikipedia.org/wiki/Cron[cron], Windows https://docs.microsoft.com/en-us/windows/win32/taskschd/about-the-task-scheduler[Task Scheduler], or some Continuous Integration servers like https://www.jenkins.io/[Jenkins].
 
 The 3rd problem (taking some actions when your script find it necessary) will be solved by straight-forward custom programming. This would deserve another planning and efforts.
 
-Here I will focus on the 2nd problem. How can my software compare 2 Excel files? How can it detect that the current Excel is updated since the last? How can it present the difference between the current and previous Excel files? My https://forum.katalon.com/t/visual-inspection-in-katalon-studio-reborn/57440[Visual Inspection in Katalon Studio] showed that my product is capable of comparing pairs of PNG images and pairs of text files regardless its format --- HTML, XML, JSON, CSV, CSS, JS, etc.
+Here I will focus on the 2nd problem. How can my software compare 2 Excel files? How can it detect that the current Excel is updated since the last? How can it present the difference between the current and previous Excel files?
 
-**However, `.xlsx` and `.pdf` are binary files. Any binary files require some application programs that recognizes its internal file format. My text differ module in the "materialstore" library can not deal with those binary files.**
+My https://forum.katalon.com/t/visual-inspection-in-katalon-studio-reborn/57440[Visual Inspection in Katalon Studio] showed that my product is capable of comparing pairs of PNG images and pairs of text files regardless its format --- HTML, XML, JSON, CSV, CSS, JS, etc. **However, `.xlsx` and `.pdf` are specially formatted binary files. Any binary files require some application programs that recognizes the unique file format. My text differ module in the "materialstore" library can not do any comparison of binary files.** This is the problem to solve.
 
 == Solution
 
-In https://github.com/kazurayam/VisualInspectionOfExcelAndPDF[this project] I will show you a example of comparing 2 Excel files --- chronologically previous one and current one.
+In https://github.com/kazurayam/VisualInspectionOfExcelAndPDF[this project] I will show you an example of comparing 2 Excel files --- chronologically previous one and current one.
 
 For this project, I developed a group of classes categorized as `"Mapper"`:
 
@@ -53,12 +53,8 @@ The current "Mapper"s includes the following:
 1. https://github.com/kazurayam/materialstore-mapper/blob/master/src/main/java/com/kazurayam/materialstore/mapper/Excel2CSVMapperPOI3.java[`Excel2CSVMapper`]
 2. https://github.com/kazurayam/materialstore-mapper/blob/master/src/main/java/com/kazurayam/materialstore/mapper/PDF2ImageMapper.java[`PDF2ImageMapper`]
 3. https://github.com/kazurayam/materialstore-mapper/blob/master/src/main/java/com/kazurayam/materialstore/mapper/PDF2HTMLMapper.java[`PDF2HTMLMapper`]
-4. https://github.com/kazurayam/materialstore-mapper/blob/master/src/main/java/com/kazurayam/materialstore/mapper/RSSAmznPress2ExcelMapper.java[`RSSAmznPress2ExcelMapper`]
 
-"Mapper"s will be driven by the framework of 
-
-- https://github.com/kazurayam/materialstore/
-[materialstore]
+The framework link:https://github.com/kazurayam/materialstore/[materialstore] will use those "Mapper" classes to convert a binary file into a text file. Once Excel file is converted into a CSV file, my Visual Inspection will happily compare the CSV files and compile a diff report. Once a PDF file is converted into a HTML, my Visual Inspection will happily process HTML files as well.
 
 == Description
 
@@ -68,7 +64,8 @@ I won't use https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html
 
 1. this page is not updated frequent enough. It will be updated only once per a month at most. I want a URL as testbed which is updated more frequently; I want once per 1 or 2 days.
 
-2. this page is owned by a governmental organization of JP. I do not like bothering them.
+2. this page is owned by a governmental organization of Japan. I do not like to bother them.
+
 
 Instead I would use the following URL as the testbed for my demonstration:
 

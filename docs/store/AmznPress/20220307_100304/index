@@ -1,3 +1,0 @@
-ff3a8a1f014bc640ac3346f98a26bd9f74a8f7a1	csv	{"URL.host":"press.aboutamazon.com", "URL.path":"/rss/news-releases.xml", "URL.port":"80", "URL.protocol":"https", "foo":"bar", "sheet_index":"0", "sheet_name":"press.aboutamazon.com"}
-e8264d074293275ce3d05de35e442d30e2532eb5	xlsx	{"URL.host":"press.aboutamazon.com", "URL.path":"/rss/news-releases.xml", "URL.port":"80", "URL.protocol":"https", "foo":"bar"}
-a9eec8a161f8600ac3bd9661bf0f561819c2fbe0	xml	{"URL.host":"press.aboutamazon.com", "URL.path":"/rss/news-releases.xml", "URL.port":"80", "URL.protocol":"https"}

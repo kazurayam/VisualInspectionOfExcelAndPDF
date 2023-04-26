@@ -7,6 +7,9 @@ import com.kms.katalon.core.configuration.RunConfiguration
 
 /**
  * Test Cases/Patrol/NISA/setup
+ * 
+ * setup the <projectDir>/store/NISA/ directory copying source files 
+ * from the <projectDir>/docs/store directory
  *
  */
 Path projectDir = Paths.get(RunConfiguration.getProjectDir())

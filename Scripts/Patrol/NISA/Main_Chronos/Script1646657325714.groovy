@@ -4,12 +4,12 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 import com.kazurayam.materialstore.base.reduce.MaterialProductGroup
-import com.kazurayam.materialstore.core.filesystem.JobName
-import com.kazurayam.materialstore.core.filesystem.JobTimestamp
-import com.kazurayam.materialstore.core.filesystem.MaterialList
-import com.kazurayam.materialstore.core.filesystem.Metadata
-import com.kazurayam.materialstore.core.filesystem.Store
-import com.kazurayam.materialstore.core.filesystem.Stores
+import com.kazurayam.materialstore.core.JobName
+import com.kazurayam.materialstore.core.JobTimestamp
+import com.kazurayam.materialstore.core.MaterialList
+import com.kazurayam.materialstore.core.Metadata
+import com.kazurayam.materialstore.core.Store
+import com.kazurayam.materialstore.core.Stores
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI

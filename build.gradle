@@ -1,8 +1,8 @@
 /**
- * Visual Inspection of Excel and PDF/build.gradle
+ * VisualInspectionOfExcelAndPDF/build.gradle
  */
 
-version = '0.13.1-SNAPSHOT'
+version = '0.14.0-SNAPSHOT'
 
 ext {
   ADDITIONAL_JAR_PREFIX = 'ADDITIONAL_'
@@ -18,8 +18,9 @@ configurations {
 }
 
 dependencies {
-    myconf group: 'com.kazurayam', name: 'materialstore', version: '0.13.1-SNAPSHOT'
-    myconf group: 'com.kazurayam', name: 'inspectus4selenium', version: '0.2.0-SNAPSHOT'
+    myconf group: 'com.kazurayam', name: 'materialstore', version: '0.16.0'
+    myconf group: 'com.kazurayam', name: 'inspectus4selenium', version: '0.4.0'
+    myconf group: 'com.kazurayam', name: 'materialstore-mapper', version: '0.10.0'
     myconf group: 'org.jsoup', name: 'jsoup', version: '1.14.3'
     myconf group: 'io.github.java-diff-utils', name: 'java-diff-utils', version: "4.9"
     myconf group: 'org.freemarker', name: 'freemarker', version: "2.3.31"
