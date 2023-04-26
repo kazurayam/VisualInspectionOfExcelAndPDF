@@ -59,7 +59,6 @@ WebUI.closeBrowser()
 /*
  * Helper classes, helper functions
  */
-
 class Subject {
 	private TestObject locator
 	private FileType fileType

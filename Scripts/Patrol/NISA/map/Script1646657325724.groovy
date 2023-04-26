@@ -5,7 +5,7 @@ import com.kazurayam.materialstore.core.MaterialList
 import com.kazurayam.materialstore.core.QueryOnMetadata
 import com.kazurayam.materialstore.map.MappedResultSerializer
 import com.kazurayam.materialstore.map.Mapper
-import com.kazurayam.materialstore.mapper.Excel2CSVMapperPOI3
+import com.kazurayam.inspectus.mapper.Excel2CSVMapperPOI3
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 /**

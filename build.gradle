@@ -1,6 +1,10 @@
 /**
  * VisualInspectionOfExcelAndPDF/build.gradle
  */
+plugins {
+  id 'com.kazurayam.inspectus4katalon' version '0.4.0'
+  id "com.katalon.gradle-plugin" version "0.1.1"
+}
 
 version = '0.14.0-SNAPSHOT'
 
@@ -18,24 +22,29 @@ configurations {
 }
 
 dependencies {
-    myconf group: 'com.kazurayam', name: 'materialstore', version: '0.16.0'
-    myconf group: 'com.kazurayam', name: 'inspectus4selenium', version: '0.4.0'
+    //myconf group: 'com.kazurayam', name: 'materialstore', version: '0.16.0'
+    //myconf group: 'com.kazurayam', name: 'inspectus4selenium', version: '0.4.0'
     myconf group: 'com.kazurayam', name: 'materialstore-mapper', version: '0.10.0'
-    myconf group: 'org.jsoup', name: 'jsoup', version: '1.14.3'
-    myconf group: 'io.github.java-diff-utils', name: 'java-diff-utils', version: "4.9"
-    myconf group: 'org.freemarker', name: 'freemarker', version: "2.3.31"
-    myconf group: 'com.github.kklisura.cdt', name: 'cdt-java-client', version: '4.0.0'
+    //myconf group: 'org.jsoup', name: 'jsoup', version: '1.14.3'
+    //myconf group: 'io.github.java-diff-utils', name: 'java-diff-utils', version: "4.9"
+    //myconf group: 'org.freemarker', name: 'freemarker', version: "2.3.31"
     myconf group: 'org.apache.poi', name: 'poi', version: '3.17'
     myconf group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
     myconf group: 'org.apache.commons', name: 'commons-csv', version: '1.9.0'
     myconf group: 'net.sf.cssbox', name: 'pdf2dom', version: '2.0.1'
-    myconf group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.25'
-    myconf group: 'org.apache.pdfbox', name: 'pdfbox-tools', version: '2.0.25'
-    myconf group: 'com.rometools', name: 'rome', version: '1.18.0'
-    myconf group: 'org.jdom', name: 'jdom2', version: '2.0.6.1'
+    myconf group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.26'
+    //myconf group: 'org.apache.pdfbox', name: 'pdfbox-tools', version: '2.0.26'
+    myconf group: 'org.apache.pdfbox', name: 'fontbox', version: '2.0.26'
+    //myconf group: 'org.jdom', name: 'jdom2', version: '2.0.6.1'
+    
+    implementation group: 'com.kazurayam', name: 'materialstore-mapper', version: '0.10.0'
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+    implementation group: 'net.sf.cssbox', name: 'pdf2dom', version: '2.0.1'
+    implementation group: 'org.apache.pdfbox', name: 'pdfbox-tools', version: '2.0.26'
+    
 }
 
-task drivers {
+task additionalDrivers {
     doFirst {
         delete fileTree("Drivers") {
             include("**/" + ADDITIONAL_JAR_PREFIX + "*")
@@ -47,19 +56,19 @@ task drivers {
                 .from(project.getConfigurations().getByName("myconf"))
                 .into("Drivers")
                 .include(
-                    "**/materialstore*.jar",
-                    "**/inspectus4selenium*.jar",
-                    "**/freemarker*.jar",
-                    "**/jsoup*.jar",
-                    "**/java-diff-utils*.jar",
-                    "**/freemarker*.jar",
-                    "**/cdt-java-client*.jar",
+                    //"**/materialstore*.jar",
+                    "**/materialstore-mapper*.jar",
+                    //"**/inspectus4selenium*.jar",
+                    //"**/freemarker*.jar",
+                    //"**/jsoup*.jar",
+                    //"**/java-diff-utils*.jar",
                     "**/poi-3*.jar",
-                    "**/commons-csv*.jar",
+                    //"**/commons-csv*.jar",
                     "**/pdf2dom*.jar",
                     "**/pdfbox-2*.jar",
-                    "**/rome*.jar",
-                    "**/jdom*.jar"
+                    "**/fontbox*.jar"
+                    //"**/rome*.jar",
+                    //"**/jdom*.jar"
                     )
                 .rename({ s ->
                     ADDITIONAL_JAR_PREFIX + s
