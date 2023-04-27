@@ -22,7 +22,8 @@ configurations {
 }
 
 dependencies {
-    //myconf group: 'com.kazurayam', name: 'materialstore', version: '0.16.0'
+    myconf group: 'com.kazurayam', name: 'materialstore', version: '0.16.1-SNAPSHOT'
+    myconf group: 'com.kazurayam', name: 'inspectus', version: '0.9.1-SNAPSHOT'
     //myconf group: 'com.kazurayam', name: 'inspectus4selenium', version: '0.4.0'
     myconf group: 'com.kazurayam', name: 'materialstore-mapper', version: '0.10.0'
     //myconf group: 'org.jsoup', name: 'jsoup', version: '1.14.3'
@@ -37,6 +38,7 @@ dependencies {
     myconf group: 'org.apache.pdfbox', name: 'fontbox', version: '2.0.26'
     //myconf group: 'org.jdom', name: 'jdom2', version: '2.0.6.1'
     
+
     implementation group: 'com.kazurayam', name: 'materialstore-mapper', version: '0.10.0'
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
     implementation group: 'net.sf.cssbox', name: 'pdf2dom', version: '2.0.1'
@@ -56,8 +58,9 @@ task additionalDrivers {
                 .from(project.getConfigurations().getByName("myconf"))
                 .into("Drivers")
                 .include(
-                    //"**/materialstore*.jar",
+                    "**/materialstore*.jar",
                     "**/materialstore-mapper*.jar",
+                    "**/inspectus-0.9.1-SNAPSHOT.jar",
                     //"**/inspectus4selenium*.jar",
                     //"**/freemarker*.jar",
                     //"**/jsoup*.jar",

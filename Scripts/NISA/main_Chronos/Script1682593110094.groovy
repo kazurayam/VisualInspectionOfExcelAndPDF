@@ -14,7 +14,7 @@ import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.util.KeywordUtil
 
 /**
- * Test Cases/NISA/main
+ * Test Cases/NISA/main_Chronos
  * 
  */
 Path projectDir = Paths.get(RunConfiguration.getProjectDir())
@@ -22,9 +22,9 @@ Path local = projectDir.resolve("store")
 Path remote = projectDir.resolve("store-backup")
 Store store = Stores.newInstance(local)
 Store backup = Stores.newInstance(remote)
-JobName jobName = new JobName("NISA")
+JobName jobName = new JobName("NISA_Chronos")
 JobTimestamp jobTimestamp = JobTimestamp.now()
-SortKeys sortKeys = new SortKeys("seq", "sheet_index", "URL.host", "URL.path", "URL.fragment")
+SortKeys sortKeys = new SortKeys("seq", "sheet_index", "page", "URL.path", "URL.fragment")
 
 Parameters p =
     new Parameters.Builder()

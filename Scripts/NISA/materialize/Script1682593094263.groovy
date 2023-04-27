@@ -2,7 +2,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 
 import com.kazurayam.materialstore.mapper.Excel2CSVMapperPOI3
-import com.kazurayam.materialstore.mapper.PDF2HTMLMapper
+import com.kazurayam.materialstore.mapper.PDF2ImageMapper
 import com.kazurayam.ks.URLDownloader
 import com.kazurayam.ks.URLResolver
 import com.kazurayam.materialstore.core.FileType
@@ -87,8 +87,8 @@ WebUI.closeBrowser()
 /*
  *  mapping stage:
  */
-JobTimestamp workingTimestamp = JobTimestamp.laterThan(jobTimestamp)
-MappedResultSerializer serializer = new MappedResultSerializer(store, jobName, workingTimestamp)
+// we will save generated CSV and PNG files into the same directory as the source Excel and PDF
+MappedResultSerializer serializer = new MappedResultSerializer(store, jobName, jobTimestamp)
 
 // lookup xlsx files
 MaterialList excelMaterials = 
@@ -104,7 +104,7 @@ for (Material xlsx : excelMaterials) {
 }
 // ensure CSV files have been created
 MaterialList csvMaterials =
-    store.select(jobName, workingTimestamp, FileType.CSV, QueryOnMetadata.ANY)
+    store.select(jobName, jobTimestamp, FileType.CSV, QueryOnMetadata.ANY)
 assert csvMaterials.size() > 0
 
 
@@ -113,15 +113,15 @@ assert csvMaterials.size() > 0
 MaterialList pdfMaterials = 
     store.select(jobName, jobTimestamp, FileType.PDF, QueryOnMetadata.ANY)
 assert pdfMaterials.size() > 0
-// setup the mapper which converts pdf to html
-Mapper pdf2html = new PDF2HTMLMapper()
-pdf2html.setStore(store)
-pdf2html.setMappingListener(serializer)
-// execute mapping PDF -> HTML
+// setup the mapper which converts pdf to PNG image
+Mapper pdf2image = new PDF2ImageMapper()
+pdf2image.setStore(store)
+pdf2image.setMappingListener(serializer)
+// execute mapping PDF -> PNG
 for (Material pdf : pdfMaterials) {
-	pdf2html.map(pdf)
+	pdf2image.map(pdf)
 }
-// ensure HTML files have been created
-MaterialList htmlMaterials =
-    store.select(jobName, workingTimestamp, FileType.HTML, QueryOnMetadata.ANY)
-assert htmlMaterials.size() > 0
+// ensure PNG images have been created
+MaterialList pngMaterials =
+    store.select(jobName, jobTimestamp, FileType.PNG, QueryOnMetadata.ANY)
+assert pngMaterials.size() > 0
