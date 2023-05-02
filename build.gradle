@@ -6,7 +6,7 @@ plugins {
   id "com.katalon.gradle-plugin" version "0.1.1"
 }
 
-version = '0.14.2-SNAPSHOT'
+version = '0.14.2'
 
 ext {
   ADDITIONAL_JAR_PREFIX = 'ADDITIONAL_'
@@ -22,5 +22,5 @@ dependencies {
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
     implementation group: 'net.sf.cssbox', name: 'pdf2dom', version: '2.0.1'
     implementation group: 'org.apache.pdfbox', name: 'pdfbox-tools', version: '2.0.26'
-    
+
 }
