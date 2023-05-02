@@ -101,6 +101,7 @@ xlsx2csv.setMappingListener(serializer)
 // execute mapping Excel -> CSV
 for (Material xlsx : excelMaterials) {
 	xlsx2csv.map(xlsx)
+	WebUI.comment("processed ${xlsx.toPath().getFileName().toString()}")
 }
 // ensure CSV files have been created
 MaterialList csvMaterials =
@@ -120,6 +121,7 @@ pdf2image.setMappingListener(serializer)
 // execute mapping PDF -> PNG
 for (Material pdf : pdfMaterials) {
 	pdf2image.map(pdf)
+	WebUI.comment("processed ${pdf.toPath().getFileName().toString()}")
 }
 // ensure PNG images have been created
 MaterialList pngMaterials =
