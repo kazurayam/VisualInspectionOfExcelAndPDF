@@ -142,9 +142,10 @@ It will take a few minutes to finish.
 
 When finished, you will find an HTML is generated
 
-- link:https://kazurayam.github.io/VisualInspectionOfExcelAndPDF-sample-project/store/index.html[<projectDir>/store/NISA_Chronos/index.html]
-./
-Please open this link in browser and have a look around. You will find some "diff" information as follows. They look useful, don't they?./
+- link:https://kazurayam.github.io/VisualInspectionOfExcelAndPDF-sample-project/store/index.html[`<projectDir>/store/NISA_Chronos/index.html`]
+
+
+Please open the above URL in browser and have a look around. You will find some "diff" information as follows. They look useful, don't they?./
 
 image:./docs/images/04_diff_csv.png[diff CSV]
 
