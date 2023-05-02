@@ -1,18 +1,17 @@
 import java.nio.file.Files
 import java.nio.file.Path
 
-import com.kazurayam.materialstore.mapper.Excel2CSVMapperPOI3
-import com.kazurayam.materialstore.mapper.PDF2ImageMapper
 import com.kazurayam.ks.URLDownloader
 import com.kazurayam.ks.URLResolver
 import com.kazurayam.materialstore.core.FileType
-import com.kazurayam.materialstore.core.JobTimestamp
 import com.kazurayam.materialstore.core.Material
 import com.kazurayam.materialstore.core.MaterialList
 import com.kazurayam.materialstore.core.Metadata
 import com.kazurayam.materialstore.core.QueryOnMetadata
-import com.kazurayam.materialstore.map.Mapper
 import com.kazurayam.materialstore.map.MappedResultSerializer
+import com.kazurayam.materialstore.map.Mapper
+import com.kazurayam.materialstore.mapper.Excel2CSVMapperPOI3
+import com.kazurayam.materialstore.mapper.PDF2ImageMapper
 import com.kms.katalon.core.testobject.ConditionType
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI

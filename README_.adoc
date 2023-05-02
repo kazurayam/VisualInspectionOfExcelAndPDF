@@ -6,39 +6,39 @@ This project was developed using Katalon Studio v0.8.2 (Free License). But it sh
 
 == Motivation
 
-A few years ago, I worked for a media company. I was asked to develop a tool software, which was a sort of web scraping tool. The target page was https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html[this]; it is still available to public at MAR 2022. The page looks as follows:
+A few years ago, I worked for a media company. I was asked to develop a tool software, which was a sort of web scraping tool. The target page was https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html[this]; it is still available to public at April 2023. The page looks as follows:
 
 image:./docs/images/01_NISA_target_page.png[alt=target,width=640]
 
 You don't need to understand Japanese in this page. Just note the following points.
 
-1. The page contains several links `<a href="...">EXCEL</a>` tags to the URLs of Excel files. It contains links to PDF files `<a href="...">PDF</a>` as well.
-2. The content of Excel & PDF files are updated by the publisher irregularly. The frequency of updates are not determined. By tracking the historical records, I see updates are made once a month, or once per 2 months.
+1. The page contains several links `<a href="...">EXCEL</a>` to the URLs of Excel files. It contains links to PDF files `<a href="...">PDF</a>` as well.
+2. The content of Excel & PDF files are updated by the publisher irregularly. The frequency of updates are not determined. By tracking the historical records, I see that updates are made once a month or per 2 months.
 3. The URL string of Excel/PDF files are fixed. The file names won't change at updates.
-4. The publisher does not provide any push-style notification (like https://en.wikipedia.org/wiki/RSS[RSS]) for this page. The publisher expects that those who are interested in the information of this page should continue watching the page to notify themselves of any updates.
-5. The company I worked for had a serious interest in the Excel files. Some employees were asked to visit this page everyday. When they found any updates, they downloaded the PDF/Excel files and triggered to process the files. Obviously this mission was boring.
-6. The employees hated this job. They wanted some system to automate this bullshit job.
+4. The publisher does not provide any push-style notification (like https://en.wikipedia.org/wiki/RSS[RSS]) of this page. The publisher (fsa.go.jp) expects that those who are interested in the information of this page should repeat watching the page to find any updates when made.
+5. The company I worked for had a serious interest in the attached files. Therefore the company asked some employees to watch this page everyday. When they found any updates, they downloaded the PDF/Excel files and put them into further processing. Obviously this job was boring for human.
+6. The employees hated this job. They wanted some system that automates this bullshit job.
 
-Since then I worked long and finally I have got a solution. Let me describe it.
+I worked out and got a solution. Let me describe it.
 
 == Problem to solve
 
-My solution should:
+My solution should address the following problems:
 
-1. visit the web page regularly and automatically; e.g, once a day and every business days.
-2. compare the content of Excel files visually:
-- download the current version of .xlsx files, compare the content with some previous version to find if any updates there are.
-- report the result of comparison in a human-readable format so that the staff can check what occured.
-- store the latest version of .pdf and .xlsx files somewhere. Later the software will use them as comparison basis.
-3. If any updates found, take some action. For example, transfer the .xlsx files into some organizational file server and send some notification to those who are concerned: send messages to MQ and E-mail etc.
+1. It visit the web page regularly and automatically; e.g, once a day and every business days.
+2. It should compare the content of PDF/Excel files visually:
+- It should download the current version of .pdf and .xlsx files, compare the content with the previous version to find if there are any updates in the files.
+- It should report the result of comparison in a human-readable format so that the staff can check what changes have occurred.
+- It should store the latest version of .pdf and .xlsx files somewhere as backup. Later the software will refer to them as comparison basis.
+3. If any updates found, it should take some action. For example, transfer the files into some organizational file server and send some messages to those who are concerned via Message Queue or E-mail, Slack etc.
 
-The 1st problem (running a process regularly and automatically) can be achieved using Linux https://en.wikipedia.org/wiki/Cron[cron], Windows https://docs.microsoft.com/en-us/windows/win32/taskschd/about-the-task-scheduler[Task Scheduler], or some Continuous Integration servers like https://www.jenkins.io/[Jenkins].
+The 1st problem (running a process regularly and automatically) can be achieved by Linux https://en.wikipedia.org/wiki/Cron[cron], Windows https://docs.microsoft.com/en-us/windows/win32/taskschd/about-the-task-scheduler[Task Scheduler], or some Continuous Integration servers like https://www.jenkins.io/[Jenkins].
 
 The 3rd problem (taking some actions when your script find it necessary) will be solved by straight-forward custom programming. This would deserve another planning and efforts.
 
-Here I will focus on the 2nd problem. How can my software compare 2 Excel files? How can it detect that the current Excel is updated since the last? How can it present the difference between the current and previous Excel files?
+Here I will focus on the 2nd problem. How can my software compare 2 PDF/Excel files? How can it detect that the current file has been updated since the last? How can it present the difference between the current and previous version visible to human?
 
-My https://forum.katalon.com/t/visual-inspection-in-katalon-studio-reborn/57440[Visual Inspection in Katalon Studio] showed that my product is capable of comparing pairs of PNG images and pairs of text files regardless its format --- HTML, XML, JSON, CSV, CSS, JS, etc. **However, `.xlsx` and `.pdf` are specially formatted binary files. Any binary files require some application programs that recognizes the unique file format. My text differ module in the "materialstore" library can not do any comparison of binary files.** This is the problem to solve.
+My liburary https://forum.katalon.com/t/visual-inspection-in-katalon-studio-reborn/57440[Visual Inspection in Katalon Studio] showed that it is capable of comparing pairs of PNG images and pairs of text files regardless its format --- HTML, XML, JSON, CSV, CSS, JS, etc. **However, `.xlsx` and `.pdf` are specially formatted binary files. Any binary files require some application programs that recognizes the unique file format. My text differ module in the "materialstore" library can not do any comparison of binary files.** This is the problem to solve.
 
 == Solution
 
