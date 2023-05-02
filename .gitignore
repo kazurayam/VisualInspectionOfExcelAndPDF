@@ -15,6 +15,9 @@ build
 
 .project
 
-/.cache/
-/Drivers/
-/store/
+.cache/
+
+Drivers/
+
+store/
+store-backup/

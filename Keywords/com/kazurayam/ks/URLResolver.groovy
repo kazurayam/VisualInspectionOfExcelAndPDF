@@ -4,7 +4,7 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 public class URLResolver {
-	
+
 	static URL resolve(URL base, String relativeUrl) {
 		try {
 			if (relativeUrl.startsWith("http")) {

@@ -1,11 +1,15 @@
 /**
- * Visual Inspection of Excel and PDF/build.gradle
+ * VisualInspectionOfExcelAndPDF/build.gradle
  */
+plugins {
+  id 'com.kazurayam.inspectus4katalon' version '0.4.2'
+  id "com.katalon.gradle-plugin" version "0.1.1"
+}
 
-version = '0.10.3'
+version = '0.14.2'
 
 ext {
-  AUTO_IMPORTED_JAR_PREFIX = 'AUTOIMPORTED_'
+  ADDITIONAL_JAR_PREFIX = 'ADDITIONAL_'
 }
 
 repositories {
@@ -13,57 +17,10 @@ repositories {
   mavenLocal()
 }
 
-configurations {
-  myconf
-}
-
 dependencies {
-    myconf group: 'com.kazurayam', name: 'materialstore', version: '0.10.3'
-    myconf group: 'com.kazurayam', name: 'kazurayam_FreeMarker_directives', version: '0.2.0'
-    myconf group: 'org.jsoup', name: 'jsoup', version: '1.14.3'
-    myconf group: 'io.github.java-diff-utils', name: 'java-diff-utils', version: "4.9"
-    myconf group: 'org.freemarker', name: 'freemarker', version: "2.3.31"
-    myconf group: 'com.github.kklisura.cdt', name: 'cdt-java-client', version: '4.0.0'
-    myconf group: 'org.apache.poi', name: 'poi', version: '3.17'
-    myconf group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
-    myconf group: 'org.apache.commons', name: 'commons-csv', version: '1.9.0'
-    myconf group: 'net.sf.cssbox', name: 'pdf2dom', version: '2.0.1'
-    myconf group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.25'
-    myconf group: 'org.apache.pdfbox', name: 'pdfbox-tools', version: '2.0.25'
-    myconf group: 'com.rometools', name: 'rome', version: '1.18.0'
-    myconf group: 'org.jdom', name: 'jdom2', version: '2.0.6.1'
-}
+    implementation group: 'com.kazurayam', name: 'materialstore-mapper', version: '0.10.2'
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+    implementation group: 'net.sf.cssbox', name: 'pdf2dom', version: '2.0.1'
+    implementation group: 'org.apache.pdfbox', name: 'pdfbox-tools', version: '2.0.26'
 
-task drivers {
-    doFirst {
-        delete fileTree("Drivers") {
-            include("**/" + AUTO_IMPORTED_JAR_PREFIX + "*")
-        }
-    }
-    doLast {
-        copy { copySpec ->
-            copySpec
-                .from(project.getConfigurations().getByName("myconf"))
-                .into("Drivers")
-                .include(
-                    "**/materialstore*.jar",
-                    "**/materialstore-mapper*.jar",
-                    "**/kazurayam_FreeMarker_directives*.jar",
-                    "**/freemarker*.jar",
-                    "**/jsoup*.jar",
-                    "**/java-diff-utils*.jar",
-                    "**/freemarker*.jar",
-                    "**/cdt-java-client*.jar",
-                    "**/poi-3*.jar",
-                    "**/commons-csv*.jar",
-                    "**/pdf2dom*.jar",
-                    "**/pdfbox-2*.jar",
-                    "**/rome*.jar",
-                    "**/jdom*.jar"
-                    )
-                .rename({ s ->
-                    AUTO_IMPORTED_JAR_PREFIX + s
-                    })
-        }
-    }
 }
