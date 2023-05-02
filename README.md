@@ -1,215 +1,155 @@
 # Visual inspection of Excel and PDF
 
-This is a [Katalon Studio](https://www.katalon.com/katalon-studio/) project for demonstration purpose. You can download a zip of this project at [Releases](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/releases/tag/0.2.0) page, unzip and open your local Katalon Studio.
+This is a [Katalon Studio](https://www.katalon.com/katalon-studio/) project for demonstration purpose. You can download a zip of this project at [Releases](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/releases/) page, unzip and open it in your local Katalon Studio.
 
-This project was developed using Katalon Studio v0.8.2 (Free License). But it should work with any version of KS as it uses only the stable parts of KS.
+This project was developed using Katalon Studio v0.8.2 (Free License). But it should work with any version of Katalon Studio.
 
 ## Motivation
 
-A few years ago, I worked for a media company. I was asked to develop a tool software, which was a sort of web scraping tool. The target page was [this](https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html); it is still available to public at MAR 2022. The page looks as follows:
+A few years ago, I worked for a media company. I was asked to develop a tool software, which was a sort of web scraping tool. The target page was [this](https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html); it is still available to public at April 2023. The page looks as follows:
 
 ![target](./docs/images/01_NISA_target_page.png)
 
-You don’t need to understand this page in detail except the following points.
+You don’t need to understand Japanese in this page. Just note the following points.
 
-1.  The page contains several links `<a href="…​">EXCEL</a>` tags to the URLs of Excel files. It contains links to PDF files `<a href="…​">PDF</a>` as well.
+1.  The page contains several links `<a href="…​">EXCEL</a>` to the URLs of Excel files. It contains links to PDF files `<a href="…​">PDF</a>` as well.
 
-2.  The content of Excel & PDF files are updated by the publisher irregularly. The frequency of updates are not determined. By tracking the record, I see once a month, or once per 2 months.
+2.  The content of Excel & PDF files are updated by the publisher irregularly. The frequency of updates are not determined. By tracking the historical records, I see that updates are made once a month or per 2 months.
 
 3.  The URL string of Excel/PDF files are fixed. The file names won’t change at updates.
 
-4.  The publisher does not provide any push-style notification (like [RSS](https://en.wikipedia.org/wiki/RSS)) for this page. The publisher expects that those who are interested in the information of this page should continue watching the page as often as possible.
+4.  The publisher does not provide any push-style notification (like [RSS](https://en.wikipedia.org/wiki/RSS)) of this page. The publisher (fsa.go.jp) expects that those who are interested in the information of this page should repeat watching the page to find any updates when made.
 
-5.  The company I worked for had a serious interest in the Excel files. Some employees were asked to visit this page everyday. They were asked, when found updates, to trigger an action to process the Excel files.
+5.  The company I worked for had a serious interest in the attached files. Therefore the company asked some employees to watch this page everyday. When they found any updates, they downloaded the PDF/Excel files and put them into further processing. Obviously this job was boring for human.
 
-6.  The employees hated this job. They wanted some system to automate this bullshit job.
+6.  The employees hated this job. They wanted some system that automates this bullshit job.
 
-Since then I worked long to solve this problem. Finally I have got a solution. Let me describe it.
+I worked out and got a solution. Let me describe it.
 
 ## Problem to solve
 
-My solution should:
+My solution should address the following problems:
 
-1.  visit the web page regularly and automatically, for example once a day
+1.  It visit the web page regularly and automatically; e.g, once a day and every business days.
 
-2.  compare the content of Excel files visually:
+2.  It should compare the content of PDF/Excel files visually:
 
-    -   download the current version of .xlsx files, compare the content with some version to find if any updates there are.
+    -   It should download the current version of .pdf and .xlsx files, compare the content with the previous version to find if there are any updates in the files.
 
-    -   report the result of comparison in a human-readable format so that the staff can check what occured.
+    -   It should report the result of comparison in a human-readable format so that the staff can check what changes have occurred.
 
-    -   store the previous versions of .xlsx file somewhere so that the software can compare the current one against.
+    -   It should store the latest version of .pdf and .xlsx files somewhere as backup. Later the software will refer to them as comparison basis.
 
-3.  If any updates found, take some action. For example, transfer the .xlsx files into some organizational file server and send some notification to those who are concerned: send messages to MQ and E-mail etc.
+3.  If any updates found, it should take some action. For example, transfer the files into some organizational file server and send some messages to those who are concerned via Message Queue or E-mail, Slack etc.
 
-The 1st problem (running a process regularly and automatically) will be implemented using Linux [cron](https://en.wikipedia.org/wiki/Cron), Windows [Task Scheduler](https://docs.microsoft.com/en-us/windows/win32/taskschd/about-the-task-scheduler), and some Continuous Integration servers like [Team City](https://www.jetbrains.com/teamcity/). Katalon offers [Test Ops](https://www.katalon.com/testops/) of course.
+The 1st problem (running a process regularly and automatically) can be achieved by Linux [cron](https://en.wikipedia.org/wiki/Cron), Windows [Task Scheduler](https://docs.microsoft.com/en-us/windows/win32/taskschd/about-the-task-scheduler), or some Continuous Integration servers like [Jenkins](https://www.jenkins.io/).
 
 The 3rd problem (taking some actions when your script find it necessary) will be solved by straight-forward custom programming. This would deserve another planning and efforts.
 
-Here I will focus on the 2nd problem. How can my software compare 2 Excel files? How can it detect that the current Excel is updated since the last? How can it present the difference between the current and previous Excel files? My [Visual Inspection in Katalon Studio](https://forum.katalon.com/t/visual-inspection-in-katalon-studio-reborn/57440) showed that my product is capable of comparing pairs of PNG images and pairs of text files regardless its format --- HTML, XML, JSON, CSV, CSS, JS, etc.
+Here I will focus on the 2nd problem. How can my software compare 2 PDF/Excel files? How can it detect that the current file has been updated since the last? How can it present the difference between the current and previous version visible to human?
 
-**However, `.xlsx` and `.pdf` are binary files. Any binary files require some application programs that recognizes its internal file format. My text differ module in the "materialstore" library can not deal with those binary files.**
+My demo project [Visual Inspection in Katalon Studio](https://forum.katalon.com/t/visual-inspection-in-katalon-studio-reborn/57440) enabled me to compare pairs of PNG images. And also it enabled me to compare pairs of text files regardless its semantic format --- HTML, XML, JSON, CSV, CSS, JS, etc. **However, `.xlsx` and `.pdf` are specially formatted binary files. Any binary files require application programs that recognizes its own unique file format. My classes in the "materialstore" library can not compare binary files.**
 
 ## Solution
 
-In [this project](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF) I will show you a example of comparing 2 Excel files --- chronologically previous one and current one.
+I have developped a library [materialstore-mapper](https://github.com/kazurayam/materialstore-mapper) which extends the [materialstore](https://github.com/kazurayam/materialstore) library. It enables me to convert a Excel `.xlsx` file into a set of `.csv` files. It also enables me to convert a PDF `.pdf` file into a set of PNG images.
 
-For this project, I developed a group of classes categorized as `"Mapper"`:
+In [this project](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF) I will show you an example of downloading the current set of Excel+PDF files and then compare them with the previous set.
 
--   [materialstore-mapper](https://github.com/kazurayam/materialstore-mapper/)
-
-The current "Mapper"s includes the following:
+For this project, I used a group of classes categorized as `"Mapper"`:
 
 1.  [`Excel2CSVMapper`](https://github.com/kazurayam/materialstore-mapper/blob/master/src/main/java/com/kazurayam/materialstore/mapper/Excel2CSVMapperPOI3.java)
 
 2.  [`PDF2ImageMapper`](https://github.com/kazurayam/materialstore-mapper/blob/master/src/main/java/com/kazurayam/materialstore/mapper/PDF2ImageMapper.java)
 
-3.  [`PDF2HTMLMapper`](https://github.com/kazurayam/materialstore-mapper/blob/master/src/main/java/com/kazurayam/materialstore/mapper/PDF2HTMLMapper.java)
-
-4.  [`RSSAmznPress2ExcelMapper`](https://github.com/kazurayam/materialstore-mapper/blob/master/src/main/java/com/kazurayam/materialstore/mapper/RSSAmznPress2ExcelMapper.java)
-
-"Mapper"s will be driven by the framework of
-
--   <https://github.com/kazurayam/materialstore/>
-
-## Description
-
-### Target Application Under Test
-
-I won’t use [this page](https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html) as the testbed for demonstration, because
-
-1.  this page is not updated frequent enough. It will be updated only once per a month at most. I want a URL as testbed which is updated more frequently; I want once per 1 or 2 days.
-
-2.  this page is owned by a governmental organization of JP. I do not like bothering them.
-
-Instead I would use the following URL as the testbed for my demonstration:
-
--   [Amazon.com, Inc. - Press Room News Releases](https://press.aboutamazon.com/rss/news-releases.xml)
-
-This URL provides a RSS feed in XML format, is updated more frequently (several times on Wed, Thu, Fri). And I believe that the publisher would not stop me accessing it using my automated software.
+The framework [materialstore](https://github.com/kazurayam/materialstore/) will use those "Mapper" classes to convert a binary file into a text file. Once Excel file is converted into a CSV file, my Visual Inspection will happily compare the CSV files and compile a diff report. Once a PDF file is converted into PNG images, my Visual Inspection will happily process PNG files as well.
 
 ## Demonstration
 
-### How to activate the demo
+Here I assume that
 
-open the Test Suite `"Test Suite/Patrol/TS_AmznPress"` and run it.
+1.  You have downloaded the zip of this project from the [Releases](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/releases) page and unzipped it.
 
-![TS](./docs/images/00_TS_AmznPress.png)
+2.  You have the Java8 or newer installed.
 
-### Sequence diagram
+3.  You have [Gradle](https://gradle.org/) installed.
 
-The following diagram illustrates the process sequence of [Test Case/main/AmznPress/Main\_Chronos](./Scripts/main/AmznPress/Main_Chronos/Script1646628040145.groovy)
+If you don’t have Gradle in hand, please refer to [this guidance](https://forum.katalon.com/t/automated-visual-inspection/81966#setting-up-gradle-build-tool-22).
 
-![sequence](./docs/diagrams/out/sequence/sequence.png)
+### Running the demonstration, step by step
 
-### How the data is transformed, explained step-by-step
+#### Download external dependencies
 
-The sole input is the RSS document published by Amazon.com. The contents will change day by day. A snapshot looks like this:
+In the command line, cd to the project root, and run:
 
--   [Example RSS](https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/store/AmznPress/20220307_100304/objects/a9eec8a161f8600ac3bd9661bf0f561819c2fbe0.xml)
+    $ gradle drivers
 
-<!-- -->
+    $ gradle copyKatalonDependencies
 
-    <rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xml:base="https://press.aboutamazon.com/">
-      <channel>
-        <title>Amazon.com, Inc. - Press Room News Releases</title>
-        <link>https://press.aboutamazon.com/</link>
-        <description>Amazon.com, Inc. - Press Room News Releases</description>
-        <language>en</language>
-        ...
-        <item>
-          <title>Amazon Announces Partnerships with Universities and Colleges in Texas to Fully Fund Tuition for Local Hourly Employees</title>
-          <link>https://press.aboutamazon.com/news-releases/news-release-details/amazon-announces-partnerships-universities-and-colleges-texas</link>
-          <description>Amazon employees in the U.S. will benefit from new Career Choice partnerships with more than 140 Universities and Colleges including several colleges and universities in Texas as well as national non-profit online providers Southern New Hampshire University , Colorado State University – Global,</description>
-          <pubDate>Thu, 03 Mar 2022 12:45:00 -0500</pubDate>
-          <dc:creator>Amazon.com, Inc. - Press Room News Releases</dc:creator>
-          <guid isPermaLink="false">31586</guid>
-        </item>
-        ...
+When done, you will see a lot of jar files are located in the `Drivers` directory of the project. These are the external dependencies required to run this project:
 
-This RSS XML document will be internally converted into an Excel xlsx file, like this
+    $ ls Drivers
+    AUTOIMPORTED_ExecutionProfilesLoader-1.2.1.jar          katalon_generated_jackson-dataformat-cbor-2.6.7.jar
+    AUTOIMPORTED_ashot-1.5.4.jar                            katalon_generated_java-diff-utils-4.11.jar
+    AUTOIMPORTED_commons-csv-1.9.0.jar                      katalon_generated_javassist-3.18.2-GA.jar
+    AUTOIMPORTED_freemarker-2.3.31.jar                      katalon_generated_javax.activation-api-1.2.0.jar
+    AUTOIMPORTED_inspectus-0.9.2.jar                        katalon_generated_jaxb-api-2.3.1.jar
+    AUTOIMPORTED_java-diff-utils-4.11.jar                   katalon_generated_jcl-over-slf4j-1.7.5.jar
+    AUTOIMPORTED_jsoup-1.14.3.jar                           katalon_generated_jdom2-2.0.6.1.jar
+    AUTOIMPORTED_materialstore-0.16.2.jar                   katalon_generated_jmespath-java-1.11.232.jar
+    katalon_generated_FontVerter-1.2.22.jar                 katalon_generated_jna-4.1.0.jar
+    katalon_generated_annotations-2.0.1.jar                 katalon_generated_jna-platform-4.1.0.jar
+    katalon_generated_ashot-1.5.4.jar                       katalon_generated_joda-time-2.8.1.jar
+    katalon_generated_aws-java-sdk-core-1.11.232.jar        katalon_generated_jsoup-1.14.3.jar
+    katalon_generated_aws-java-sdk-kms-1.11.232.jar         katalon_generated_jsr305-1.3.9.jar
+    katalon_generated_aws-java-sdk-s3-1.11.232.jar          katalon_generated_materialstore-0.16.2.jar
+    katalon_generated_cglib-nodep-2.1_3.jar                 katalon_generated_materialstore-mapper-0.10.2.jar
+    katalon_generated_commons-codec-1.10.jar                katalon_generated_pdf2dom-2.0.1.jar
+    katalon_generated_commons-collections4-4.1.jar          katalon_generated_pdfbox-2.0.26.jar
+    katalon_generated_commons-csv-1.9.0.jar                 katalon_generated_pdfbox-debugger-2.0.26.jar
+    katalon_generated_commons-exec-1.3.jar                  katalon_generated_pdfbox-tools-2.0.26.jar
+    katalon_generated_commons-io-2.11.0.jar                 katalon_generated_poi-3.17.jar
+    katalon_generated_commons-lang3-3.4.jar                 katalon_generated_poi-ooxml-3.17.jar
+    katalon_generated_commons-logging-1.2.jar               katalon_generated_poi-ooxml-schemas-3.17.jar
+    katalon_generated_curvesapi-1.04.jar                    katalon_generated_reflections-0.9.9.jar
+    katalon_generated_fontbox-2.0.26.jar                    katalon_generated_rome-1.18.0.jar
+    katalon_generated_freemarker-2.3.31.jar                 katalon_generated_rome-utils-1.18.0.jar
+    katalon_generated_gson-2.8.2.jar                        katalon_generated_s3fs-2.2.2.jar
+    katalon_generated_guava-19.0.jar                        katalon_generated_selenium-api-2.53.0.jar
+    katalon_generated_hamcrest-core-1.3.jar                 katalon_generated_selenium-remote-driver-2.53.0.jar
+    katalon_generated_httpclient-4.5.2.jar                  katalon_generated_slf4j-api-1.7.32.jar
+    katalon_generated_httpcore-4.4.4.jar                    katalon_generated_stax-api-1.0.1.jar
+    katalon_generated_ion-java-1.0.2.jar                    katalon_generated_subprocessj-0.3.4.jar
+    katalon_generated_jackson-annotations-2.6.0.jar         katalon_generated_tika-core-1.5.jar
+    katalon_generated_jackson-core-2.6.7.jar                katalon_generated_xmlbeans-2.6.0.jar
+    katalon_generated_jackson-databind-2.6.7.1.jar
 
-![Example Excel](./docs/images/02_Spreadsheet.png)
+There are quite a lot. They are just used by my "materialstore" and "materialstore-mapper" library. You do not need to know these libraries.
 
-And then the Excel file will be converted into a CSV text file, like this
+#### Setting up the fixture data
 
--   [Example CSV](https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/store/AmznPress/20220307_100304/objects/ff3a8a1f014bc640ac3346f98a26bd9f74a8f7a1.csv)
+Start Katalon Studio. Open the project and run the Test Case script [Test Cases/NISA/setupFixture](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/blob/develop/Scripts/NISA/setupFixture/Script1683011128442.groovy). It will take a few minuites to finish.
 
-<!-- -->
+![setupFixture](./docs/images/02_setupFixture.png)
 
-    publishedDate,uri,title,link,description,author
-    Sat Mar 05 10:00:00 JST 2022,31591,Amazon travaille en collaboration avec des ONG et ses employés pour offrir un soutien immédiat au peuple ukrainien,https://press.aboutamazon.com/news-releases/news-release-details/amazon-travaille-en-collaboration-avec-des-ong-et-ses-employes,"Comme beaucoup d'entre vous à travers le monde, nous observons ce qui se passe en Ukraine avec horreur, inquiétude et cœur lourds. Bien que nous n’ayons pas d'activité commerciale directe en Ukraine, plusieurs de nos employés et partenaires sont originaires de ce pays ou entretiennent un lien","Amazon.com, Inc. - Press Room News Releases"
-    Fri Mar 04 02:45:00 JST 2022,31586,Amazon Announces Partnerships with Universities and Colleges in Texas to Fully Fund Tuition for Local Hourly Employees,https://press.aboutamazon.com/news-releases/news-release-details/amazon-announces-partnerships-universities-and-colleges-texas,"Amazon employees in the U.S. will benefit from new Career Choice partnerships with more than 140 Universities and Colleges including several colleges and universities in Texas as well as national non-profit online providers Southern New Hampshire University , Colorado State University – Global,","Amazon.com, Inc. - Press Room News Releases"
-    ...
+By this, a directory `store/NISA_Chronos_20220307_100608` will be created. In there you will find a lot of files prepared, which includes .xlsx, .pdf, .csv and .png. These files are prepared to reproduce an environment as if you ran the task at 10:06 AM, 7th of March, 2022.
 
-### Report
+![store initialized](./docs/images/03_store_initialized.png)
 
-The `Test Suites/Patrol/TS_AmznPress` will eventually generate a report in HTML format. In this report you can see the result of visual comparison of 2 CSV files, which is equal to the comparison of 2 Excel files.
+#### Running the Test Case "NISA/main\_Chronos"
 
--   [store/AmznPress-index.html](https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/store/AmznPress-index.html)
+Now you are ready to run the demo. Open the following Test Case and run it.
 
-![report](./docs/images/03_diff_of_CSV_files.png)
+-   [Test Cases/NISA/main\_Chronos](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/blob/develop/Scripts/NISA/main_Chronos/Script1682593110094.groovy)
 
-## How the test script is written
+It will take a few minutes to finish.
 
-### Main script
+When finished, you will find an HTML is generated
 
-The `AmznPress/Main_Chronos` script is the entry point of overall processing.
+-   [&lt;projectDir&gt;/store/NISA\_Chronos/index.html\`](https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/store/NISA_Chronos/index.html`)
 
--   [`Test Cases/Patrol/AmznPress/Main_Chronos`](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/blob/master/Scripts/Patrol/AmznPress/Main_Chronos/Script1646657325745.groovy)
+Please open this link in browser and have a look around. You will find some "diff" information as follows. They look useful, don’t they?./
 
-It drives sub modules, which includes broadly 4 stages of processing.
+![diff CSV](./docs/images/04_diff_csv.png)
 
-1.  **Materialize stage**
-
-2.  **Map stage**
-
-3.  **Reduce stage**
-
-4.  **Report stage**
-
-The script as "Materialize state" will get access to the target URL, download the web resources (e.g, RSS XML file), save it into the "store" directory on disk. The files stored in the "store" is called "Material".
-
-The script as "Map stage" will read a Material from the store, and write back a Material into the store. It will carry out a series of format conversion. E.g, RSS XML to Excel, Excel to CSV, PDF to PNG image, PDF to HTML.
-
-It is likely the case that a single script processes both of "Materialize stage" and "Map stage" sequentially. Also it is likely the case that a single script processes multiple source URLs and iterate over them.
-
-The "Materialize stage" and "Map stage" is heavily dependent on each use cases. You are supposed to design these stages and implement them for yourself.
-
-The "Reduce stage" will construct 2 sets of "MaterialList" = list of files to compare. And it will compare the pairs of Materials to generate the diff information.
-
-The "Report stage" will compile a report of comparison result.
-
-The "Reduce stage" and "Report stage" of the sample are highly modularized, and possibly you would just reuse the sample script. It should work for you.
-
-### Sub modules
-
--   [Test Cases/Patrol/AmznPress/materialize\_map\_map](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/blob/master/Scripts/Patrol/AmznPress/materialize_map_map/Script1646657325735.groovy)
-
--   [Test Cases/Patrol/AmznPress/reduce](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/blob/master/Scripts/Patrol/AmznPress/reduce/Script1646657325740.groovy)
-
--   [Test Cases/Patrol/AmznPress/report](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/blob/master/Scripts/Patrol/AmznPress/report/Script1646657325749.groovy)
-
-## External dependencies
-
-This project uses various open-source products, such as "Apache Commons IO", "java-diff-utils", "jsoup", "Apache POI". For the detail about the dependencies, please check the [`build.gradle`](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/blob/master/build.gradle).
-
-## Applicability to your cases
-
-The "materialstore" and "materialstore-mapper" library are general purposed Groovy library. You should be able to apply them to any URL to solve your problems.
-
-Only the "Materialize stage" depends on the Selenium-java API in order to get access to Web resources through web browser. The "Reduce stage" and "Report stage" have no dependency on Selenium.
-
-I used Katalon Studio for build a demonstration. But these 2 libraries do not depend on Katalon Studio API at all. You can build a Patrol using Gradle/Maven/Ant with the "materialstore" + "materialstore-mapper".
-
-## Conclusion
-
-The employees of the company I worked a few years ago required a software tool that could automate visiting [this URL](https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html), check if the Excel files are updated or not, and if any changes are found, fire some data processing action. I would name this type of tool as **Patrol**. Now I am finally ready to build a Patrol for them. However, I am too late, I quit the job already. I regret that I can not help them.
-
-## Appendix
-
--   [VisualInspectionOfExcelAndPDF/docs/index](https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/)
-
--   [materialstore API javadoc](https://kazurayam.github.io/materialstore/api/)
-
--   [materialstore-mapper API javadoc](https://kazurayam.github.io/materialstore-mapper/api/)
+![diff PNG](./docs/images/05_diff_png.png)
