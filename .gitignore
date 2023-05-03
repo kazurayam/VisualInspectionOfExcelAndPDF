@@ -21,3 +21,5 @@ Drivers/
 
 store/
 store-backup/
+
+tmp/
