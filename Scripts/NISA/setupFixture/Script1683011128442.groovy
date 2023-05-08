@@ -26,12 +26,18 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 Path projectDir = Paths.get(RunConfiguration.getProjectDir())
 Path sourceDir = projectDir.resolve("src/test/fixtures/store")
 Path storeDir = projectDir.resolve("store")
+Path backupDir = projectDir.resolve("store-backup")
 
 // initialize the output storeDir
 if (Files.exists(storeDir)) {
 	DeleteDir.deleteDirectoryRecursively(storeDir)
 }
 Files.createDirectories(storeDir)
+
+// remove the store-backup dir if exists
+if (Files.exists(backupDir)) {
+	DeleteDir.deleteDirectoryRecursively(backupDir)
+}
 
 // copy the previous Materials (.xlsx and .pdf)
 Files.walkFileTree(sourceDir, new CopyDir(sourceDir, storeDir))
