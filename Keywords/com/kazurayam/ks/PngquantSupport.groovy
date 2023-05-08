@@ -18,11 +18,20 @@ public class PngquantSupport {
 		Path p = compress(png.toPath())
 		return p.toFile()
 	}
+	
+	/**
+	 * Here we assume that the Pngquant is installed and availabe as "/usr/local/bin/pngquant".
+	 * If Pngquant is not available, will do nothing and return the input png as the result
+	 * 
+	 * @param png
+	 * @return PNG file
+	 */
 
 	public Path compress(Path png) {
 		Objects.requireNonNull(png)
 		assert Files.exists(png)
-		CommandLocator.CommandLocatingResult cfr = CommandLocator.find("pngquant")
+		CommandLocator.CommandLocatingResult cfr = CommandLocator.find("/usr/local/bin/pngquant")
+		println "cfr.returncode()=${cfr.returncode()}" 
 		if (cfr.returncode() == 0) {
 			String commandPath = cfr.command()
 			Subprocess.CompletedProcess cp;
