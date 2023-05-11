@@ -8,7 +8,7 @@ This project was developed using Katalon Studio v0.8.2 (Free License). But it sh
 
 A few years ago, I worked for a media company. I was asked to develop a tool software, which was a sort of web scraping tool. The target page was [this](https://www.fsa.go.jp/policy/nisa2/about/tsumitate/target/index.html); it is still available to public at April 2023. The page looks as follows:
 
-![target](./docs/images/01_NISA_target_page.png)
+![target](https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/images/01_NISA_target_page.png)
 
 You don’t need to understand Japanese in this page. Just note the following points.
 
@@ -82,6 +82,7 @@ If you don’t have Gradle in hand, please refer to [this guidance](https://foru
 
 In the command line, cd to the project root, and run:
 
+    $ cd VisualInspectionOfExcelAndPDF
     $ gradle drivers
 
     $ gradle copyKatalonDependencies
@@ -130,11 +131,11 @@ There are quite a lot. They are just used by my "materialstore" and "materialsto
 
 Start Katalon Studio. Open the project and run the Test Case script [Test Cases/NISA/setupFixture](https://github.com/kazurayam/VisualInspectionOfExcelAndPDF/blob/develop/Scripts/NISA/setupFixture/Script1683011128442.groovy). It will take a few minuites to finish.
 
-![setupFixture](./docs/images/02_setupFixture.png)
+![setupFixture](https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/images/02_setupFixture.png)
 
 By this, a directory `store/NISA_Chronos_20220307_100608` will be created. In there you will find a lot of files prepared, which includes .xlsx, .pdf, .csv and .png. These files are prepared to reproduce an environment as if you ran the task at 10:06 AM, 7th of March, 2022.
 
-![store initialized](./docs/images/03_store_initialized.png)
+![store initialized](https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/images/03_store_initialized.png)
 
 #### Running the Test Case "NISA/main\_Chronos"
 
@@ -150,6 +151,6 @@ When finished, you will find an HTML is generated
 
 Please open the above URL in browser and have a look around. You will find some "diff" information as follows. They look useful, don’t they?./
 
-![diff CSV](./docs/images/04_diff_csv.png)
+![diff CSV](https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/images/04_diff_csv.png)
 
-![diff PNG](./docs/images/05_diff_png.png)
+![diff PNG](https://kazurayam.github.io/VisualInspectionOfExcelAndPDF/images/05_diff_png.png)

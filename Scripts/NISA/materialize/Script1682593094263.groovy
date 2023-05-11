@@ -1,3 +1,5 @@
+import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
+
 import java.nio.file.Files
 import java.nio.file.Path
 
@@ -11,7 +13,8 @@ import com.kazurayam.materialstore.core.QueryOnMetadata
 import com.kazurayam.materialstore.map.MappedResultSerializer
 import com.kazurayam.materialstore.map.Mapper
 import com.kazurayam.materialstore.mapper.Excel2CSVMapperPOI3
-import com.kazurayam.materialstore.mapper.PDF2ImageMapper
+import com.kazurayam.materialstore.mapper.PDF2ImagePNGMapper
+import com.kazurayam.materialstore.mapper.PDF2ImageJPEGMapper
 import com.kms.katalon.core.testobject.ConditionType
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
@@ -82,47 +85,6 @@ for (int i = 0; i < subjects.size(); i++) {
 }
 WebUI.closeBrowser()
 
-
-/*
- *  mapping stage:
- */
-// we will save generated CSV and PNG files into the same directory as the source Excel and PDF
-MappedResultSerializer serializer = new MappedResultSerializer(store, jobName, jobTimestamp)
-
-// lookup xlsx files
-MaterialList excelMaterials = 
-	store.select(jobName, jobTimestamp, FileType.XLSX, QueryOnMetadata.ANY)
-assert excelMaterials.size() > 0
-// setup the mapper which converts xlsx to csv
-Mapper xlsx2csv = new Excel2CSVMapperPOI3()
-xlsx2csv.setStore(store)
-xlsx2csv.setMappingListener(serializer)
-// execute mapping Excel -> CSV
-for (Material xlsx : excelMaterials) {
-	xlsx2csv.map(xlsx)
-	WebUI.comment("processed ${xlsx.toPath().getFileName().toString()}")
-}
-// ensure CSV files have been created
-MaterialList csvMaterials =
-    store.select(jobName, jobTimestamp, FileType.CSV, QueryOnMetadata.ANY)
-assert csvMaterials.size() > 0
-
-
-
-// lookup pdf files
-MaterialList pdfMaterials = 
-    store.select(jobName, jobTimestamp, FileType.PDF, QueryOnMetadata.ANY)
-assert pdfMaterials.size() > 0
-// setup the mapper which converts pdf to PNG image
-Mapper pdf2image = new PDF2ImageMapper()
-pdf2image.setStore(store)
-pdf2image.setMappingListener(serializer)
-// execute mapping PDF -> PNG
-for (Material pdf : pdfMaterials) {
-	pdf2image.map(pdf)
-	WebUI.comment("processed ${pdf.toPath().getFileName().toString()}")
-}
-// ensure PNG images have been created
-MaterialList pngMaterials =
-    store.select(jobName, jobTimestamp, FileType.PNG, QueryOnMetadata.ANY)
-assert pngMaterials.size() > 0
+// call the mapping stage
+WebUI.callTestCase(findTestCase("Test Cases/NISA/mapping"),
+	["store": store, "jobName": jobName, "jobTimestamp": jobTimestamp])
