@@ -2,11 +2,11 @@
  * VisualInspectionOfExcelAndPDF/build.gradle
  */
 plugins {
-  id 'com.kazurayam.inspectus4katalon' version '0.4.4'
+  id 'com.kazurayam.inspectus4katalon' version '0.4.5'
   id "com.katalon.gradle-plugin" version "0.1.1"
 }
 
-version = '0.14.4'
+version = '0.14.5'
 
 ext {
   ADDITIONAL_JAR_PREFIX = 'ADDITIONAL_'
@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'com.kazurayam', name: 'materialstore-mapper', version: '0.10.4'
+    implementation group: 'com.kazurayam', name: 'materialstore-mapper', version: '0.11.0-SNAPSHOT'
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
     implementation group: 'net.sf.cssbox', name: 'pdf2dom', version: '2.0.1'
     implementation group: 'org.apache.pdfbox', name: 'pdfbox-tools', version: '2.0.26'
